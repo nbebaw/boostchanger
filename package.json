@@ -1,6 +1,6 @@
 {
   "name": "boostchanger",
-  "version": "4.0.1",
+  "version": "4.0.3",
   "description": "With this app you can control your Turbo Boost of your CPU",
   "main": "main.js",
   "scripts": {
@@ -10,7 +10,10 @@
   },
   "build": {
     "linux": {
-      "target": "AppImage",
+      "target": [
+        "AppImage",
+        "zip"
+      ],
       "maintainer": "nbebaw",
       "publish": {
         "provider": "github"
