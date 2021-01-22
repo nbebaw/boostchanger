@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=4.0.0
+Name=Boost Changer
+GenericName[de]=CPU Turbo Boost Steuerung
+Comment=Control CPU Turbo Boost
+Exec=/usr/bin/boostchanger
+Icon=icon.png
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=System;Monitor;
+Keywords=system;monitor

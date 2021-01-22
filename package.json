@@ -1,0 +1,43 @@
+{
+  "name": "boostchanger",
+  "version": "4.0.0",
+  "description": "With this app you can control your Turbo Boost of your CPU",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "build --dir",
+    "dist": "build"
+  },
+  "build": {
+    "linux": {
+      "target": "AppImage",
+      "maintainer": "nbebaw",
+      "publish": {
+        "provider": "github"
+      }
+    }
+  },
+  "repository": "https://github.com/nbebaw/boostChanger.git",
+  "keywords": [
+    "Electron",
+    "cpu",
+    "settings",
+    "manager",
+    "turbo",
+    "boost",
+    "changer",
+    "system"
+  ],
+  "author": "nbebaw",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "latest"
+  },
+  "dependencies": {
+    "electron-updater": "^4.3.5",
+    "electron-window-state": "^5.0.3",
+    "public-ip": "^4.0.3",
+    "sudo-prompt": "^9.2.1",
+    "systeminformation": "^4.34.5"
+  }
+}

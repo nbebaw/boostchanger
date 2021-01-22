@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="nav">
+            <span class="nav-label">About</span>
+        </div>
+        <div class="sidebar">
+            <img class="logo" src="../icon/boostChanger.png" alt="">
+            <ul class="slider-ul">
+                <li><a href="index.html"><img class="icons" src="../icon/tachometer.png"><span
+                            class="slider-label">Dashboard</span></a></li>
+                <li><a href="cpu_settings.html"><img class="icons" src="../icon/zahnrad.png"><span
+                            class="slider-label">CPU
+                            Settings</span></a></li>
+                <li class="active"><a href="#"><img class="icons" src="../icon/die-info.png"><span
+                            class="slider-label">About</span></a>
+                </li>
+            </ul>
+            <div>
+                <button class="btn" id="close">Close</button>
+            </div>
+
+        </div>
+        <div class="main-about">
+            <div class="infos">
+                <img class="logo-about" src="../icon/boostChanger.png" alt="">
+            </div>
+            <div>
+                <h4 class="about-info">Boost Changer</h4>
+                <p class="about-info">With this app you can control CPU turbo boost</p>
+                <p class="about-info">This app is made by nbebaw with electron</p>
+            </div>
+        </div>
+    </div>
+    <!-- You can also require other files to run in this process -->
+    <script>
+        require("../scripts/about.js")
+    </script>
+</body>
+
+</html>
