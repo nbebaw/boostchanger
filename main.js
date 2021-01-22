@@ -146,7 +146,6 @@ function createWindow() {
 
 //TODO: for production
 app.on('ready', () => {
-  const fs = require('fs')
   //show error when the user uses VM 
   if (fs.existsSync('/sys/devices/system/cpu/intel_pstate/no_turbo')) {
     createWindow()

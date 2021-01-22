@@ -8,4 +8,4 @@
 
 ## Reporting a Vulnerability
 
-You can open an Issue tickt if you found any security problem or if you have any problem
+You can open an Issue ticket if you found any security problem or if you have any problem.
