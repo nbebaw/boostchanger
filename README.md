@@ -42,8 +42,8 @@ https://aur.archlinux.org/packages/boostchanger-git/
 
 <br>
 
-![Dashboard](/uploads/f6ad43a12647f17ad2f34c500ba76ee9/Dashboard.png)
+![Dashboard](https://user-images.githubusercontent.com/57049550/105500022-9483ab80-5cc2-11eb-88e1-260d326c0ba0.png)
 
-![ProcessorSettings](/uploads/925a7ce3857fd9dd729b9f554c50a20b/ProcessorSettings.png)
+![settings](https://user-images.githubusercontent.com/57049550/105500026-95b4d880-5cc2-11eb-96f9-0ab83e7ed054.png)
 
-![about](/uploads/2c3f6285044e626f7c0cec5447228a73/about.png)
+![About](https://user-images.githubusercontent.com/57049550/105500025-95b4d880-5cc2-11eb-9940-7f97a9344080.png)
