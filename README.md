@@ -1,5 +1,5 @@
 # Boost Changer
-### The old repo of this app in gitlab
+### Here you can find the old repo of this app in gitlab
 https://gitlab.com/nbebaw/boostchanger
 
 <br>
