@@ -16,7 +16,7 @@
 <h3><u>For Developer</u><h3>
 You can help me to improve this app
 <h4>Clone this repository</h4>
-git clone https://gitlab.com/nbebaw/boostchanger.git
+git clone https://github.com/nbebaw/boostchanger.git
 <h4>Go into the repository</h4>
 cd boostChanger
 <h4>Install dependencies</h4>
@@ -26,16 +26,15 @@ npm start
 <br>
 <h3><u>For all Debian, Ubuntu, Mint, Fedora, Solus, OpenSUSE, Deepin users </u></h3>
 <h4>&#9203; How to run this app &#9203;</h4>
-<h4>Download</h4>
-If you don't have wget<br>
-<code>sudo apt install wget</code> ( Ignore this step if you already have wget ) <br>
-<code>wget https://gitlab.com/nbebaw/boostchanger/-/archive/v3.9/boostchanger-v3.9.zip</code><br>
-<h4>Install</h4>
-<p>unzip the file</p>
-<code>unzip boostchanger-v3.9.zip</code>
-<h4>Run setup file</h4>
-<code>cd boostchanger-v3.9
-<code>sudo ./setup.sh</code>
+<h4>Download AppImage</h4>
+<h5>Install wget if you don't have</h5>
+<pre>sudo apt install wget</pre> ( Ignore this step if you already have wget ) <br>
+<pre>wget https://github.com/nbebaw/boostchanger/releases/download/v4.0.3/boostchanger-4.0.3.AppImage</pre><br>
+<h4>Make the app executable app</h4>
+<pre>chmod +x boostchanger-4.0.3.AppImage</pre>
+<h4>Run the app</h4>
+<pre>./boostchanger-4.0.3.AppImage</pre>
+  Or just double click the app and it will run 
 <h3><u>For Arch Linux users</u></h3>
 <p>This app is already in AUR</p>
 https://aur.archlinux.org/packages/boostchanger-git/
