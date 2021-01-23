@@ -1,4 +1,8 @@
 # Boost Changer
+### The old repo of this app in gitlab
+https://gitlab.com/nbebaw/boostchanger
+
+<br>
 
 <h2>&#9889; This App is only for Linux &#9889;</h2>
 <h2>&#10071; This App needs root rights. When and why? &#10071;</h2>
