@@ -31,8 +31,8 @@ npm start
 <h3><u>For all Debian, Ubuntu, Mint, Fedora, Solus, OpenSUSE, Deepin users </u></h3>
 <h4>&#9203; How to run this app &#9203;</h4>
 <h4>Download AppImage</h4>
-<h5>Install wget if you don't have</h5>
-<pre>sudo apt install wget</pre> ( Ignore this step if you already have wget ) <br>
+<h5>Install wget if you don't have ( Ignore this step if you already have wget )</h5>
+<pre>sudo apt install wget</pre> 
 <pre>wget https://github.com/nbebaw/boostchanger/releases/download/v4.0.3/boostchanger-4.0.3.AppImage</pre>
 <h4>Make the app executable app</h4>
 <pre>chmod +x boostchanger-4.0.3.AppImage</pre>
