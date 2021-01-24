@@ -20,6 +20,13 @@ In generall this app does not need root rights but when you hit the Turn Off or 
 
 #### :pushpin: This app will only work on a real machine. :pushpin:
 
+## What it isn't
+This is just a GUI application and it is not meant to replace 
+[TLP](https://linrunner.de/en/tlp/tlp.html), [powertop](https://01.org/powertop) or 
+any other power management / energy consumption service. It is meant just to 
+provide quick access to ``sysfs`` settings related to Intel Processors and 
+in fact it can run on top of TLP.
+
 ## Installation
 ### Download
   
@@ -58,6 +65,19 @@ npm run
 ## Common Issue for AppImage
 <pre>The SUID sandbox helper binary was found, but is not configured correctly. Rather than run without sandboxing ...</pre>
 :white_check_mark: [The solution](https://github.com/nbebaw/boostchanger/issues/1)
+
+## New features for future releases
+1 = High Prio |  2 = Middle Prio |  3 = Low Prio
+Feature | Prio
+--- | ---
+Add AMD Support | 1
+CPU Frequencies | 1
+GPU Frequencies | 1
+CPU Governor | 2
+[Nvidia PowerMizer Settings](https://www.nvidia.com/en-us/drivers/feature-powermizer/) | 2
+Represent all Infos about the Machine | 2
+Make this App cross Platform | 3
+
 
 <br>
 
