@@ -19,19 +19,6 @@ In generall this app does not need root rights but when you hit the Turn Off or 
 > when you change the energy performance in Boost Changer you have to change this file and that is what this app does.
 
 #### :pushpin: This app will only work on a real machine. :pushpin:
-## Installation only for Developer
-You can help me to improve this app
-
-```bash
-# Clone this repo
-git clone https://github.com/nbebaw/boostchanger.git
-
-# Install dependencies
-npm install
-
-# Run the App
-npm run
-```
 
 ## Installation
 ### Download
@@ -53,6 +40,19 @@ chmod +x boostchanger-4.0.3.AppImage
 
 # Run the app
 ./boostchanger-4.0.3.AppImage
+```
+## Installation only for Developer
+You can help me to improve this app
+
+```bash
+# Clone this repo
+git clone https://github.com/nbebaw/boostchanger.git
+
+# Install dependencies
+npm install
+
+# Run the App
+npm run
 ```
 
 ## Common Issue for AppImage
