@@ -46,7 +46,7 @@ Solus | [AppImage](https://github.com/nbebaw/boostchanger/releases/download/v4.0
 OpenSUSE | [AppImage](https://github.com/nbebaw/boostchanger/releases/download/v4.0.3/boostchanger-4.0.3.AppImage) :cd: | 
 Arch | [AUR](https://aur.archlinux.org/packages/boostchanger-git) :cd: | 
 
-### How to run this app
+### How to run AppImage
 ```bash
 # Make the app executable 
 chmod +x boostchanger-4.0.3.AppImage
