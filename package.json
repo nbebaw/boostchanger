@@ -41,6 +41,6 @@
     "electron-window-state": "^5.0.3",
     "public-ip": "^4.0.3",
     "sudo-prompt": "^9.2.1",
-    "systeminformation": "^4.34.5"
+    "systeminformation": "^5.3.1"
   }
 }
