@@ -10,13 +10,13 @@ closeApp.addEventListener('click', () => {
 })
 
 // Get CPU speed for the first time
-sys_info.cpuCurrentspeed().then((cpu_speed) => {
+sys_info.cpuCurrentSpeed().then((cpu_speed) => {
   var cpu_speedInMHz = cpu_speed.avg * 1000
   document.getElementById('cpu_MHz').innerHTML = cpu_speedInMHz + " MHz";
 })
 // CPU speed with interval
 setInterval(() => {
-  sys_info.cpuCurrentspeed().then((cpu_speed) => {
+  sys_info.cpuCurrentSpeed().then((cpu_speed) => {
     var cpu_speedInMHz = cpu_speed.avg * 1000 //cpu_speed.avg = cpu speed in GHz
     document.getElementById('cpu_MHz').innerHTML = cpu_speedInMHz + " MHz";
   })
