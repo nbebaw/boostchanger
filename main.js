@@ -92,10 +92,11 @@ function createWindow() {
     height: 500,
     x: windowStateKeeper().x,
     y: windowStateKeeper().y,
-    resizable: false, //TODO for DEV
+    // resizable: false, //TODO for DEV
     title: 'Boost Changer',
     webPreferences: {
       nodeIntegration: true,
+      contextIsolation: false,
     },
     show: false, //When all the content of the app has been loaded, then the app will show up
     icon: path.join(__dirname, 'icon/boostChanger.png')
@@ -117,7 +118,7 @@ function createWindow() {
   mainWindow.once('ready-to-show', mainWindow.show)
 
   // TODO: for DEV Open the DevTools. 
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 
   // clear all local storage data before app starts
   mainWindow.webContents.session.clearStorageData()
