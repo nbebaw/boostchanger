@@ -32,21 +32,21 @@ in fact it can run on top of TLP.
   
   OS| Release Link |
 --- | --- |
-Debian | [AppImage](https://github.com/nbebaw/boostchanger/releases/download/v4.1.3/boostchanger-4.1.3.AppImage) :cd: | 
-Ubuntu | [AppImage](https://github.com/nbebaw/boostchanger/releases/download/v4.1.3/boostchanger-4.1.3.AppImage) :cd: | 
-Fedora | [AppImage](https://github.com/nbebaw/boostchanger/releases/download/v4.1.3/boostchanger-4.1.3.AppImage) :cd: | 
-Redhat | [AppImage](https://github.com/nbebaw/boostchanger/releases/download/v4.1.3/boostchanger-4.1.3.AppImage) :cd: | 
-Solus | [AppImage](https://github.com/nbebaw/boostchanger/releases/download/v4.1.3/boostchanger-4.1.3.AppImage) :cd: | 
-OpenSUSE | [AppImage](https://github.com/nbebaw/boostchanger/releases/download/v4.1.3/boostchanger-4.1.3.AppImage) :cd: | 
+Debian | [AppImage](https://github.com/nbebaw/boostchanger/releases/download/v4.1.4/boostchanger-4.1.4.AppImage) :cd: | 
+Ubuntu | [AppImage](https://github.com/nbebaw/boostchanger/releases/download/v4.1.4/boostchanger-4.1.4.AppImage) :cd: | 
+Fedora | [AppImage](https://github.com/nbebaw/boostchanger/releases/download/v4.1.4/boostchanger-4.1.4.AppImage) :cd: | 
+Redhat | [AppImage](https://github.com/nbebaw/boostchanger/releases/download/v4.1.4/boostchanger-4.1.4.AppImage) :cd: | 
+Solus | [AppImage](https://github.com/nbebaw/boostchanger/releases/download/v4.1.4/boostchanger-4.1.4.AppImage) :cd: | 
+OpenSUSE | [AppImage](https://github.com/nbebaw/boostchanger/releases/download/v4.1.4/boostchanger-4.1.4.AppImage) :cd: | 
 Arch | [AUR](https://aur.archlinux.org/packages/boostchanger-git) :cd: | 
 
 ### How to run AppImage
 ```bash
 # Make the app executable 
-chmod +x boostchanger-4.1.3.AppImage
+chmod +x boostchanger-4.1.4.AppImage
 
 # Run the app
-./boostchanger-4.1.3.AppImage
+./boostchanger-4.1.4.AppImage
 ```
 ## Installation only for Developer
 You can help me to improve this app
