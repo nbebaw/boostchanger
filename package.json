@@ -11,8 +11,9 @@
   "build": {
     "linux": {
       "target": [
-        "AppImage",
-        "zip"
+        "zip",
+        "pacman",
+        "deb"
       ],
       "maintainer": "nbebaw",
       "publish": {
@@ -35,7 +36,7 @@
   "license": "MIT",
   "devDependencies": {
     "electron": "^12.0.6",
-    "electron-builder": "^22.10.5"
+    "electron-builder": "^22.11.3"
   },
   "dependencies": {
     "electron-updater": "^4.3.9",
