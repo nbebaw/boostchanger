@@ -1,6 +1,6 @@
 {
   "name": "boostchanger",
-  "version": "4.1.5",
+  "version": "4.1.6",
   "description": "With this app you can control your Turbo Boost of your CPU",
   "main": "main.js",
   "scripts": {
