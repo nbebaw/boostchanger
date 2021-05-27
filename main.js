@@ -92,7 +92,7 @@ function createWindow() {
     minHeight: 500,
     x: windowStateKeeper().x,
     y: windowStateKeeper().y,
-    // resizable: false, //TODO for DEV
+    // resizable: false,
     title: 'Boost Changer',
     webPreferences: {
       preload: path.join(__dirname, "./preload.js"),
