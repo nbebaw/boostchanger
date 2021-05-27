@@ -88,15 +88,14 @@ function createWindow() {
 
   // Create the main window.
   mainWindow = new BrowserWindow({
-    width: 850,
-    height: 500,
+    minWidth: 850,
+    minHeight: 500,
     x: windowStateKeeper().x,
     y: windowStateKeeper().y,
-    resizable: false, //TODO for DEV
+    // resizable: false, //TODO for DEV
     title: 'Boost Changer',
     webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false,
+      preload: path.join(__dirname, "./preload.js"),
     },
     show: false, //When all the content of the app has been loaded, then the app will show up
     icon: path.join(__dirname, 'icon/boostChanger.png')
