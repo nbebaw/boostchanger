@@ -2,12 +2,6 @@
 // It has the same sandbox as a Chrome extension.
 const sys_info = require("systeminformation");
 module.exports = () => {
-  // close app if user hit close button
-  const closeApp = document.getElementById("close");
-  closeApp.addEventListener("click", () => {
-    window.close();
-  });
-
   //os name
   if (localStorage.getItem("os_name")) {
     document.getElementById("os_name").innerHTML =

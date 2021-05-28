@@ -3,12 +3,6 @@ var fs = require("fs");
 const readline = require("readline");
 const sys_info = require("systeminformation");
 module.exports = () => {
-  // close app if user hit close button
-  const closeApp = document.getElementById("close");
-  closeApp.addEventListener("click", () => {
-    window.close();
-  });
-
   // Get CPU speed for the first time
   sys_info.cpuCurrentSpeed().then((cpu_speed) => {
     var cpu_speedInMHz = cpu_speed.avg * 1000;
