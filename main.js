@@ -136,15 +136,7 @@ function createWindow() {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-// // TODO: for DEV
-// app.on('ready', () => {
-//   // call trayApp function
-//   trayApp()
-//   createWindow()
-// })
-// // TODO: Till here
 
-//TODO: for production
 app.on('ready', () => {
   //show error when the user uses VM 
   if (fs.existsSync('/sys/devices/system/cpu/intel_pstate/no_turbo')) {
@@ -154,7 +146,7 @@ app.on('ready', () => {
   } else {
     errorDialog()
   }
-}) //TODO: Till here
+})
 
 // Definition (Help) dialog
 function helpDialog() {

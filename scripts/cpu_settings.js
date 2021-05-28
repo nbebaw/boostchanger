@@ -1,8 +1,22 @@
-const sudo = require("sudo-prompt");
 var fs = require("fs");
 const readline = require("readline");
 const sys_info = require("systeminformation");
+const { exec } = require("child_process");
 module.exports = () => {
+  
+  // function to make exec function as first function to be executed
+  function os_func() {
+    this.execCommand = function (cmd, callback) {
+      exec(cmd, (error, stdout, stderr) => {
+        if (error) {
+          console.error(`exec error: ${error}`);
+          return;
+        }
+
+        callback(stdout);
+      });
+    };
+  }
   // Get CPU speed for the first time
   sys_info.cpuCurrentSpeed().then((cpu_speed) => {
     var cpu_speedInMHz = cpu_speed.avg * 1000;
@@ -16,10 +30,6 @@ module.exports = () => {
     });
   }, 1000);
 
-  //sudo-prompt needs always options with the name
-  var options = {
-    name: "Boost Changer",
-  };
   var no_turbo = readline.createInterface({
     input: fs.createReadStream("/sys/devices/system/cpu/intel_pstate/no_turbo"),
   });
@@ -33,31 +43,21 @@ module.exports = () => {
     document.getElementById("toggle_change").addEventListener("change", () => {
       var turbo_toggle = document.getElementById("turbo_toggle");
       if (turbo_toggle.checked == false) {
-        sudo.exec(
-          "echo 1 > /sys/devices/system/cpu/intel_pstate/no_turbo",
-          options,
-          (stderr) => {
-            if (stderr instanceof Error) {
-              throw stderr;
-            }
-            new Notification("Boost Changer", {
-              body: "Turbo Boost is now OFF",
-            });
-          }
-        );
+        var os = new os_func();
+        os.execCommand("echo 1 | pkexec tee /sys/devices/system/cpu/intel_pstate/no_turbo", function () {
+          // show notification after command is executed
+          new Notification("Boost Changer", {
+            body: "Turbo Boost is now OFF",
+          });
+        });
       } else {
-        sudo.exec(
-          "echo 0 > /sys/devices/system/cpu/intel_pstate/no_turbo",
-          options,
-          (stderr) => {
-            if (stderr instanceof Error) {
-              throw stderr;
-            }
-            new Notification("Boost Changer", {
-              body: "Turbo Boost is now ON",
-            });
-          }
-        );
+        var os = new os_func();
+        os.execCommand("echo 0 | pkexec tee /sys/devices/system/cpu/intel_pstate/no_turbo", function () {
+          // show notification after command is executed
+          new Notification("Boost Changer", {
+            body: "Turbo Boost is now ON",
+          });
+        });
       }
     });
   });
@@ -81,51 +81,39 @@ module.exports = () => {
     }
   });
   document.getElementById("btn-save").addEventListener("click", () => {
-    sudo.exec(
-      "echo 30 > /sys/devices/system/cpu/intel_pstate/max_perf_pct",
-      options,
-      (stderr) => {
-        if (stderr instanceof Error) {
-          throw stderr;
-        }
-        badgeTag.innerHTML = " Power Save";
-      }
-    );
+    var os = new os_func();
+    os.execCommand("echo 30 | pkexec tee /sys/devices/system/cpu/intel_pstate/max_perf_pct", function () {
+      // show notification after command is executed
+      new Notification("Boost Changer", {
+        body: "Mode: Power Save",
+      });
+    });
   });
   document.getElementById("btn-balance").addEventListener("click", () => {
-    sudo.exec(
-      "echo 50 > /sys/devices/system/cpu/intel_pstate/max_perf_pct",
-      options,
-      (stderr) => {
-        if (stderr instanceof Error) {
-          throw stderr;
-        }
-        badgeTag.innerHTML = " Balance";
-      }
-    );
+    var os = new os_func();
+    os.execCommand("echo 50 | pkexec tee /sys/devices/system/cpu/intel_pstate/max_perf_pct", function () {
+      // show notification after command is executed
+      new Notification("Boost Changer", {
+        body: "Mode: Balance",
+      });
+    });
   });
   document.getElementById("btn-perf").addEventListener("click", () => {
-    sudo.exec(
-      "echo 70 > /sys/devices/system/cpu/intel_pstate/max_perf_pct",
-      options,
-      (stderr) => {
-        if (stderr instanceof Error) {
-          throw stderr;
-        }
-        badgeTag.innerHTML = " Performance";
-      }
-    );
+    var os = new os_func();
+    os.execCommand("echo 70 | pkexec tee /sys/devices/system/cpu/intel_pstate/max_perf_pct", function () {
+      // show notification after command is executed
+      new Notification("Boost Changer", {
+        body: "Mode: Performance",
+      });
+    });
   });
   document.getElementById("btn-ultra").addEventListener("click", () => {
-    sudo.exec(
-      "echo 100 > /sys/devices/system/cpu/intel_pstate/max_perf_pct",
-      options,
-      (stderr) => {
-        if (stderr instanceof Error) {
-          throw stderr;
-        }
-        badgeTag.innerHTML = " Ultra";
-      }
-    );
+    var os = new os_func();
+    os.execCommand("echo 100 | pkexec tee /sys/devices/system/cpu/intel_pstate/max_perf_pct", function () {
+      // show notification after command is executed
+      new Notification("Boost Changer", {
+        body: "Mode: Ultra",
+      });
+    });
   });
 };
