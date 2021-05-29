@@ -33,7 +33,11 @@
     "turbo",
     "boost",
     "changer",
-    "system"
+    "system",
+    "battery",
+    "save",
+    "linux",
+    "kernel"
   ],
   "author": "nbebaw",
   "license": "MIT",
