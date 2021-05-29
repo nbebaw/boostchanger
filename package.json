@@ -6,7 +6,9 @@
   "scripts": {
     "start": "electron .",
     "build": "electron-builder -l",
-    "release": "electron-builder -l -p 'onTagOrDraft'"
+    "release": "electron-builder -l -p 'onTagOrDraft'",
+    "check": "npm outdated",
+    "updateAll": "npm install systeminformation@latest ; npm install public-ip@latest ; npm install electron-window-state@latest ; npm install electron-updater@latest ; npm install electron-builder@latest"
   },
   "build": {
     "linux": {
@@ -42,7 +44,7 @@
   "dependencies": {
     "electron-updater": "^4.3.9",
     "electron-window-state": "^5.0.3",
-    "public-ip": "^4.0.3",
-    "systeminformation": "^5.7.3"
+    "public-ip": "^4.0.4",
+    "systeminformation": "^5.7.4"
   }
 }
