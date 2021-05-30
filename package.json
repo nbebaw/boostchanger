@@ -16,7 +16,9 @@
         "AppImage",
         "zip",
         "pacman",
-        "deb"
+        "deb",
+        "snap",
+        "rpm"
       ],
       "category": "Settings",
       "maintainer": "nbebaw",
