@@ -13,9 +13,9 @@ module.exports = () => {
                             type: "info",
                             buttons: ["Ok"],
                             title: "About",
-                            message: "Boost Changer v4.2.0",
+                            message: "Boost Changer v4.2.1",
                             detail: "With this app you can control CPU turbo boost and the settings of the cpu speed in order to consuming less battery voltage. \nThis app is made by nbebaw",
-                            icon: path.join(__dirname, "icon/boostChanger.png")
+                            icon: path.join(__dirname, "../public/icon/boostChanger.png")
                             
                         })
                     }

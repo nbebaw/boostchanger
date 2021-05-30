@@ -10,7 +10,7 @@ let mainWindow, tray, trayMenu
 
 // define tray
 function trayApp() {
-  tray = new Tray(path.join(__dirname, 'icon/boostChanger.png'));
+  tray = new Tray(path.join(__dirname, '../public/icon/boostChanger.png'));
   tray.setToolTip('Boost Changer');
   trayMenu = Menu.buildFromTemplate([
     {
@@ -39,7 +39,7 @@ function errorDialog() {
         message: "Oh Sorry",
         detail: "It seems, that you have AMD cpu. This App works only now with Intel CPUs",
         buttons: ["Ok"],
-        icon: path.join(__dirname, "icon/boostChanger.png")
+        icon: path.join(__dirname, "../public/icon/boostChanger.png")
       })
 
     } else {
@@ -53,7 +53,7 @@ function errorDialog() {
             message: "Oh Sorry",
             detail: "It seems, that you have an old Intel CPU. This App works only now on a modern Intel CPUs",
             buttons: ["Ok"],
-            icon: path.join(__dirname, "icon/boostChanger.png")
+            icon: path.join(__dirname, "../public/icon/boostChanger.png")
           })
         } else {
           // User uses VM
@@ -63,7 +63,7 @@ function errorDialog() {
             message: "Oh Sorry",
             detail: "It seems, that you are using a VM. This App works only on a real Machine.",
             buttons: ["Ok"],
-            icon: path.join(__dirname, "icon/boostChanger.png")
+            icon: path.join(__dirname, "../public/icon/boostChanger.png")
           }).then((ok) => {
             if (ok.response === 0) {
               app.quit()
@@ -85,21 +85,23 @@ function createWindow() {
     const updater = require('./updater.js')
     setTimeout(updater, 3000)
   }
-
   // Create the main window.
   mainWindow = new BrowserWindow({
+    width: 850,
+    height: 500,
     minWidth: 850,
     minHeight: 500,
     x: windowStateKeeper().x,
     y: windowStateKeeper().y,
-    // resizable: false,
     title: 'Boost Changer',
     webPreferences: {
-      preload: path.join(__dirname, "./preload.js"),
+      preload: path.join(__dirname, "preload.js"),
     },
+    
     show: false, //When all the content of the app has been loaded, then the app will show up
-    icon: path.join(__dirname, 'icon/boostChanger.png')
+    icon: path.join(__dirname, '../public/icon/boostChanger.png')
   })
+
 
   // When user minimize, the app will disappear 
   mainWindow.on('minimize', (event) => {
@@ -111,7 +113,7 @@ function createWindow() {
   appMenu()
 
   // load the index.html of the app.
-  mainWindow.loadFile('frontend/index.html')
+  mainWindow.loadFile(__dirname + './../public/index.html')
 
   // When all the content of the app has been loaded, then the app will show up
   mainWindow.once('ready-to-show', mainWindow.show)
@@ -156,7 +158,7 @@ function helpDialog() {
     message: "Help",
     detail: "If you faced any problem with Boost Changer Please open an issue Ticket in the gitlab repo",
     buttons: ["Ok"],
-    icon: path.join(__dirname, "icon/boostChanger.png")
+    icon: path.join(__dirname, "../public/icon/boostChanger.png")
   })
 }
 module.exports = { helpDialog } // make this function as public 

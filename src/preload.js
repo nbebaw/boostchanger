@@ -1,7 +1,7 @@
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
-const cpu_settings = require("./scripts/cpu_settings"); // CPU Settings
-const dashboard = require("./scripts/dashboard"); // Dashboard
+const cpu_settings = require("./cpu_settings"); // CPU Settings
+const dashboard = require("./dashboard"); // Dashboard
 
 window.addEventListener("DOMContentLoaded", () => {
   // close app if user hit close button

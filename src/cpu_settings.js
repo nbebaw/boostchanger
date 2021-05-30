@@ -87,6 +87,7 @@ module.exports = () => {
       new Notification("Boost Changer", {
         body: "Mode: Power Save",
       });
+      badgeTag.innerHTML = "Power Save"
     });
   });
   document.getElementById("btn-balance").addEventListener("click", () => {
@@ -96,6 +97,7 @@ module.exports = () => {
       new Notification("Boost Changer", {
         body: "Mode: Balance",
       });
+      badgeTag.innerHTML = "Balance"
     });
   });
   document.getElementById("btn-perf").addEventListener("click", () => {
@@ -105,6 +107,7 @@ module.exports = () => {
       new Notification("Boost Changer", {
         body: "Mode: Performance",
       });
+      badgeTag.innerHTML = "Performance"
     });
   });
   document.getElementById("btn-ultra").addEventListener("click", () => {
@@ -114,6 +117,7 @@ module.exports = () => {
       new Notification("Boost Changer", {
         body: "Mode: Ultra",
       });
+      badgeTag.innerHTML = "Ultra"
     });
   });
 };

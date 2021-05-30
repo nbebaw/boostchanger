@@ -1,8 +1,8 @@
 {
   "name": "boostchanger",
-  "version": "4.2.0",
+  "version": "4.2.1",
   "description": "With this app you can control your Turbo Boost of your CPU",
-  "main": "main.js",
+  "main": "src/main.js",
   "scripts": {
     "start": "electron .",
     "build": "electron-builder -l",
