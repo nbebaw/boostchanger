@@ -1,6 +1,4 @@
 # Boost Changer
-### Here you can find the old repo of this app in gitlab
-https://gitlab.com/nbebaw/boostchanger
 
 ## :bangbang: This App is now only for Linux :bangbang:
 
@@ -42,6 +40,9 @@ Arch | [AUR](https://aur.archlinux.org/packages/boostchanger-git) :cd: |
 
 ### How to run AppImage
 ```bash
+# Download the app
+wget https://github.com/nbebaw/boostchanger/releases/download/v4.2.1/boostchanger-4.2.1.AppImage
+
 # Make the app executable 
 chmod +x boostchanger-4.2.1.AppImage
 

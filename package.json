@@ -18,6 +18,7 @@
         "pacman",
         "deb"
       ],
+      "category": "Settings",
       "maintainer": "nbebaw",
       "publish": {
         "provider": "github"
