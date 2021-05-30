@@ -17,8 +17,7 @@
         "zip",
         "pacman",
         "deb",
-        "snap",
-        "rpm"
+        "snap"
       ],
       "category": "Settings",
       "maintainer": "nbebaw",
