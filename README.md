@@ -1,5 +1,7 @@
 # Boost Changer
 
+![GitHub](https://img.shields.io/github/license/nbebaw/boostchanger) ![GitHub all releases](https://img.shields.io/github/downloads/nbebaw/boostchanger/total) ![GitHub repo size](https://img.shields.io/github/repo-size/nbebaw/boostchanger) ![GitHub issues](https://img.shields.io/github/issues/nbebaw/boostchanger) ![GitHub closed issues](https://img.shields.io/github/issues-closed/nbebaw/boostchanger) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/nbebaw/boostchanger) ![GitHub last commit](https://img.shields.io/github/last-commit/nbebaw/boostchanger)
+
 ## :bangbang: This App is now only for Linux :bangbang:
 
 ### :heavy_exclamation_mark: This App needs root rights. When and why? :heavy_exclamation_mark:
