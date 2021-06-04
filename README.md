@@ -32,25 +32,25 @@ in fact it can run on top of TLP.
   
   OS| Release Link |
 --- | --- |
-Debian | [AppImage](https://github.com/nbebaw/boostchanger/releases/download/v4.2.1/boostchanger-4.2.1.AppImage) :cd: | 
-Ubuntu | [AppImage](https://github.com/nbebaw/boostchanger/releases/download/v4.2.1/boostchanger-4.2.1.AppImage) :cd: | 
-Fedora | [AppImage](https://github.com/nbebaw/boostchanger/releases/download/v4.2.1/boostchanger-4.2.1.AppImage) :cd: | 
-Redhat | [AppImage](https://github.com/nbebaw/boostchanger/releases/download/v4.2.1/boostchanger-4.2.1.AppImage) :cd: | 
-Solus | [AppImage](https://github.com/nbebaw/boostchanger/releases/download/v4.2.1/boostchanger-4.2.1.AppImage) :cd: | 
-OpenSUSE | [AppImage](https://github.com/nbebaw/boostchanger/releases/download/v4.2.1/boostchanger-4.2.1.AppImage) :cd: | 
+Debian | [AppImage](https://github.com/nbebaw/boostchanger/releases/download/v4.2.2/boostchanger-4.2.2.AppImage) :cd: | 
+Ubuntu | [AppImage](https://github.com/nbebaw/boostchanger/releases/download/v4.2.2/boostchanger-4.2.2.AppImage) :cd: | 
+Fedora | [AppImage](https://github.com/nbebaw/boostchanger/releases/download/v4.2.2/boostchanger-4.2.2.AppImage) :cd: | 
+Redhat | [AppImage](https://github.com/nbebaw/boostchanger/releases/download/v4.2.2/boostchanger-4.2.2.AppImage) :cd: | 
+Solus | [AppImage](https://github.com/nbebaw/boostchanger/releases/download/v4.2.2/boostchanger-4.2.2.AppImage) :cd: | 
+OpenSUSE | [AppImage](https://github.com/nbebaw/boostchanger/releases/download/v4.2.2/boostchanger-4.2.2.AppImage) :cd: | 
 Arch | [AUR](https://aur.archlinux.org/packages/boostchanger-git) :cd: | 
 
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/boostchanger)
 ### How to run AppImage
 ```bash
 # Download the app
-wget https://github.com/nbebaw/boostchanger/releases/download/v4.2.1/boostchanger-4.2.1.AppImage
+wget https://github.com/nbebaw/boostchanger/releases/download/v4.2.2/boostchanger-4.2.2.AppImage
 
 # Make the app executable 
-chmod +x boostchanger-4.2.1.AppImage
+chmod +x boostchanger-4.2.2.AppImage
 
 # Run the app
-./boostchanger-4.2.1.AppImage
+./boostchanger-4.2.2.AppImage
 ```
 ## Installation only for Developer
 You can help me to improve this app
