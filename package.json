@@ -44,13 +44,13 @@
   "author": "nbebaw",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^13.1.0",
+    "electron": "^13.1.1",
     "electron-builder": "^22.10.5"
   },
   "dependencies": {
     "electron-updater": "^4.3.9",
     "electron-window-state": "^5.0.3",
     "public-ip": "^4.0.4",
-    "systeminformation": "^5.7.4"
+    "systeminformation": "^5.7.6"
   }
 }
