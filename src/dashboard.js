@@ -97,4 +97,16 @@ module.exports = () => {
         localStorage.getItem("public_ip");
     });
   }
+  
+  //Gateway default
+  if (localStorage.getItem("gateway_default")) {
+    document.getElementById("gateway_default").innerHTML =
+      localStorage.getItem("gateway_default");
+  } else {
+    sys_info.networkGatewayDefault().then((gateway_default) => {
+      localStorage.setItem("gateway_default", gateway_default);
+      document.getElementById("gateway_default").innerHTML =
+        localStorage.getItem("gateway_default");
+    });
+  }
 };
