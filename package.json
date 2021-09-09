@@ -1,6 +1,6 @@
 {
   "name": "boostchanger",
-  "version": "4.3.1",
+  "version": "4.3.2",
   "description": "With this app you can control your Turbo Boost of your CPU",
   "main": "src/main.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "build": "electron-builder -l",
     "release": "electron-builder -l -p 'onTagOrDraft'",
     "check": "npm outdated",
-    "updateAll": "npm install systeminformation@latest ; npm install public-ip@latest ; npm install electron-window-state@latest ; npm install electron-updater@latest ; npm install electron-builder@latest"
+    "updateAll": "npm install systeminformation@latest ; npm install public-ip@latest ; npm install electron-window-state@latest ; npm install electron-updater@latest ; npm install electron-builder@latest ; npm install electron@latest"
   },
   "build": {
     "linux": {
@@ -44,13 +44,13 @@
   "author": "nbebaw",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^13.2.2",
+    "electron": "^14.0.0",
     "electron-builder": "^22.11.7"
   },
   "dependencies": {
     "electron-updater": "^4.3.9",
     "electron-window-state": "^5.0.3",
     "public-ip": "^4.0.4",
-    "systeminformation": "^5.8.6"
+    "systeminformation": "^5.8.7"
   }
 }
