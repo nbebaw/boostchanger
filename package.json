@@ -1,6 +1,6 @@
 {
   "name": "boostchanger",
-  "version": "4.3.2",
+  "version": "4.3.3",
   "description": "With this app you can control your Turbo Boost of your CPU",
   "main": "src/main.js",
   "scripts": {
@@ -17,8 +17,10 @@
         "zip",
         "pacman",
         "deb",
-        "snap"
+        "snap",
+        "tar.xz"
       ],
+      "icon": "build/icon.png",
       "category": "Settings",
       "maintainer": "nbebaw",
       "publish": {
@@ -44,13 +46,13 @@
   "author": "nbebaw",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^14.0.0",
+    "electron": "^14.0.1",
     "electron-builder": "^22.11.7"
   },
   "dependencies": {
     "electron-updater": "^4.3.9",
     "electron-window-state": "^5.0.3",
     "public-ip": "^4.0.4",
-    "systeminformation": "^5.8.7"
+    "systeminformation": "^5.9.3"
   }
 }
