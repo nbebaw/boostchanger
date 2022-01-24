@@ -2,7 +2,7 @@
 const { app, BrowserWindow, Tray, Menu, dialog } = require('electron')
 const path = require('path')
 const windowStateKeeper = require('electron-window-state');
-const appMenu = require('./mainMenu.js')
+const { mainMenu } = require("./mainMenu")
 const fs = require('fs')
 
 // define all important variables
@@ -110,8 +110,7 @@ function createWindow() {
   })
 
   // App Menu
-  appMenu()
-
+  new mainMenu()
   // load the index.html of the app.
   mainWindow.loadFile(__dirname + './../public/index.html')
 

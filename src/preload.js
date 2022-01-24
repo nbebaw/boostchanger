@@ -1,7 +1,7 @@
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
-const cpu_settings = require("./cpu_settings"); // CPU Settings
-const dashboard = require("./dashboard"); // Dashboard
+const { cpuSettings } = require("./cpu_settings") // CPU Settings
+const { dashboard } = require("./dashboard") // Dashboard
 
 window.addEventListener("DOMContentLoaded", () => {
   // close app if user hit close button
@@ -11,8 +11,8 @@ window.addEventListener("DOMContentLoaded", () => {
   });
   var cpu = document.getElementById("cpu_settings");
   if (cpu) {
-    cpu_settings();
+    new cpuSettings();
   } else {
-    dashboard();
+    new dashboard();
   }
 });
