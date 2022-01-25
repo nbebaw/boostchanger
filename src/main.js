@@ -1,8 +1,9 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, Tray, Menu, dialog } = require('electron')
+const { app, BrowserWindow, Tray, Menu } = require('electron')
 const path = require('path')
 const windowStateKeeper = require('electron-window-state');
 const { mainMenu } = require("./mainMenu")
+const { error } = require("./error")
 const fs = require('fs')
 
 // define all important variables
@@ -25,58 +26,8 @@ function trayApp() {
   tray.setContextMenu(trayMenu);
 } //End Tray
 
-// Definition (Error) dialogs
-function errorDialog() {
-  const { exec } = require("child_process");
-
-  exec("cat /proc/cpuinfo | grep -m1 'vendor_id' | awk '{ print $3 }'", (stderr, stdout) => {
-    // User has AMD CPU
-    if (stderr instanceof Error) { throw stderr; }
-    if (stdout.includes("AuthenticAMD")) {
-      dialog.showMessageBox({
-        title: "Boost Changer",
-        type: "error",
-        message: "Oh Sorry",
-        detail: "It seems, that you have AMD cpu. This App works only now with Intel CPUs",
-        buttons: ["Ok"],
-        icon: path.join(__dirname, "../public/icon/boostChanger.png")
-      })
-
-    } else {
-      // User has an old Intel CPU
-      exec("systemd-detect-virt", (stderr, stdout) => {
-        if (stderr instanceof Error) { throw stderr; }
-        if (stdout.includes("none")) {
-          dialog.showMessageBox({
-            title: "Boost Changer",
-            type: "error",
-            message: "Oh Sorry",
-            detail: "It seems, that you have an old Intel CPU. This App works only now on a modern Intel CPUs",
-            buttons: ["Ok"],
-            icon: path.join(__dirname, "../public/icon/boostChanger.png")
-          })
-        } else {
-          // User uses VM
-          dialog.showMessageBox({
-            title: "Boost Changer",
-            type: "error",
-            message: "Oh Sorry",
-            detail: "It seems, that you are using a VM. This App works only on a real Machine.",
-            buttons: ["Ok"],
-            icon: path.join(__dirname, "../public/icon/boostChanger.png")
-          }).then((ok) => {
-            if (ok.response === 0) {
-              app.quit()
-            }
-          })
-        }
-      })
-    }
-  })
-}
-
 function createWindow() {
-  
+
   //Check if the OS is ARCH Linux
   if (fs.existsSync('/etc/arch-release')) {
     console.log("Looking for update? see AUR");
@@ -97,7 +48,7 @@ function createWindow() {
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },
-    
+
     show: false, //When all the content of the app has been loaded, then the app will show up
     icon: path.join(__dirname, '../public/icon/boostChanger.png')
   })
@@ -145,22 +96,9 @@ app.on('ready', () => {
     // call trayApp function
     trayApp()
   } else {
-    errorDialog()
+    new error()
   }
 })
-
-// Definition (Help) dialog
-function helpDialog() {
-  dialog.showMessageBox({
-    title: "Boost Changer",
-    type: "info",
-    message: "Help",
-    detail: "If you faced any problem with Boost Changer Please open an issue Ticket in the gitlab repo",
-    buttons: ["Ok"],
-    icon: path.join(__dirname, "../public/icon/boostChanger.png")
-  })
-}
-module.exports = { helpDialog } // make this function as public 
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {

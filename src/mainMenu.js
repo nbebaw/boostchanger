@@ -1,9 +1,25 @@
 class mainMenu {
     constructor() {
-        const { Menu, dialog } = require('electron')
-        const path = require('path')
-        var appVersion = "v" + require("../package.json").version;
-        var appDescription = require("../package.json").description;
+        this.Menu = require("electron").Menu
+        this.dialog = require("electron").dialog
+        this.path = require("path")
+        this.appVersion = "v" + require("../package.json").version
+        this.appDescription = require("../package.json").description
+
+        this.menuTemplate()
+    }
+    // Definition (Help) dialog
+    helpDialog() {
+        this.dialog.showMessageBox({
+            title: "Boost Changer",
+            type: "info",
+            message: "Help",
+            detail: "If you faced any problem with Boost Changer Please open an issue Ticket in the github repo",
+            buttons: ["Ok"],
+            icon: this.path.join(__dirname, "../public/icon/boostChanger.png")
+        })
+    }
+    menuTemplate() {
         let template = [
             {
                 label: "File",
@@ -11,13 +27,13 @@ class mainMenu {
                     {
                         label: "About",
                         click: () => {
-                            dialog.showMessageBox({
+                            this.dialog.showMessageBox({
                                 type: "info",
                                 buttons: ["Ok"],
                                 title: "About",
-                                message: `Boost Changer ${appVersion}`,
-                                detail: `${appDescription}`,
-                                icon: path.join(__dirname, "../public/icon/boostChanger.png")
+                                message: `Boost Changer ${this.appVersion}`,
+                                detail: `${this.appDescription}`,
+                                icon: this.path.join(__dirname, "../public/icon/boostChanger.png")
                             })
                         }
                     },
@@ -33,14 +49,13 @@ class mainMenu {
             { label: '|' },
             {
                 label: 'Help', click: () => {
-                    const helpWindow = require("./main.js")
-                    helpWindow.helpDialog()
+                    this.helpDialog()
                 }
             },
         ];
-        let menu = Menu.buildFromTemplate(template)
+        let menu = this.Menu.buildFromTemplate(template)
 
-        Menu.setApplicationMenu(menu)
+        this.Menu.setApplicationMenu(menu)
     }
 }
 module.exports = { mainMenu }

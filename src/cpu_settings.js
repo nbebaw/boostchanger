@@ -3,7 +3,7 @@ class cpuSettings {
     this.fs = require("fs")
     this.readline = require("readline")
     this.sys_info = require("systeminformation")
-    this.child_process = require("child_process")
+    this.exec = require("child_process").exec
 
     this.getCpuSpeed()
     this.turboBoost()
@@ -12,7 +12,7 @@ class cpuSettings {
 
   // exec function
   os_func(cmd, callback) {
-    this.child_process.exec(cmd, (error, stdout, stderr) => {
+    this.exec(cmd, (error, stdout, stderr) => {
       if (error) {
         console.error(`exec error: ${error}`);
         return;

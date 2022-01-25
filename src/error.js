@@ -1,21 +1,59 @@
-const { exec } = require("child_process");
+class error {
+    constructor() {
+        this.exec = require("child_process").exec
+        this.path = require("path")
+        this.dialog = require("electron").dialog
 
-exec("cat /proc/cpuinfo | grep -m1 'vendor_id' | awk '{ print $3 }'", (stderr, stdout) => {
-    if (stderr instanceof Error) { throw stderr; }
-    if (stdout.includes("AuthenticAMD")) {
-        document.getElementById("error").innerHTML = "you have AMD cpu. <br> This App works only now with Intel CPUs";
-    } else {
-        exec("systemd-detect-virt", (stderr, stdout) => {
+        this.errorDialog()
+    }
+
+    // Definition (Error) dialogs
+    errorDialog() {
+        this.exec("cat /proc/cpuinfo | grep -m1 'vendor_id' | awk '{ print $3 }'", (stderr, stdout) => {
+            // User has AMD CPU
             if (stderr instanceof Error) { throw stderr; }
-            if (stdout.includes("none")) {
-                document.getElementById("error").innerHTML = "you have an old Intel CPU. <br> This App works only now on a modern Intel CPUs";
+            if (stdout.includes("AuthenticAMD")) {
+                this.dialog.showMessageBox({
+                    title: "Boost Changer",
+                    type: "error",
+                    message: "Oh Sorry",
+                    detail: "It seems, that you have AMD cpu. This App works only now with Intel CPUs",
+                    buttons: ["Ok"],
+                    icon: this.path.join(__dirname, "../public/icon/boostChanger.png")
+                })
+
             } else {
-                document.getElementById("error").innerHTML = "you are using a VM. <br> This App works only on a real Machine."
+                // User has an old Intel CPU
+                this.exec("systemd-detect-virt", (stderr, stdout) => {
+                    if (stderr instanceof Error) { throw stderr; }
+                    if (stdout.includes("none")) {
+                        this.dialog.showMessageBox({
+                            title: "Boost Changer",
+                            type: "error",
+                            message: "Oh Sorry",
+                            detail: "It seems, that you have an old Intel CPU. This App works only now on a modern Intel CPUs",
+                            buttons: ["Ok"],
+                            icon: this.path.join(__dirname, "../public/icon/boostChanger.png")
+                        })
+                    } else {
+                        // User uses VM
+                        this.dialog.showMessageBox({
+                            title: "Boost Changer",
+                            type: "error",
+                            message: "Oh Sorry",
+                            detail: "It seems, that you are using a VM. This App works only on a real Machine.",
+                            buttons: ["Ok"],
+                            icon: this.path.join(__dirname, "../public/icon/boostChanger.png")
+                        }).then((ok) => {
+                            if (ok.response === 0) {
+                                app.quit()
+                            }
+                        })
+                    }
+                })
             }
         })
     }
-})
+}
 
-
-
-
+module.exports = { error }

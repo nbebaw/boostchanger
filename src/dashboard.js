@@ -7,6 +7,10 @@ class dashboard {
     this.up_time_value = document.getElementById("up_time")
     this.cpu_name_value = document.getElementById("cpu_name")
     this.mem_total_value = document.getElementById("mem_total")
+    this.disk_type_value = document.getElementById("disk_type")
+    this.disk_model_value = document.getElementById("disk_model")
+    this.disk_vendor_value = document.getElementById("disk_vendor")
+    this.has_battery_value = document.getElementById("has_battery")
     this.sys_info = require("systeminformation")
 
     // OS_NAME
@@ -19,6 +23,10 @@ class dashboard {
     this.getCpuName()
     // TOTAL MEMORY
     this.getTotalMemory()
+    this.getDiskType()
+    this.getDiskModel()
+    this.getDiskVendor()
+    this.getBatteryInfo()
   }
   // LocalStorage setItem
   setValueItem(key_name, value_name) {
@@ -88,6 +96,50 @@ class dashboard {
         this.setValueItem("mem_total", total)
         this.mem_total_value.innerHTML = localStorage.getItem("mem_total");
       });
+    }
+  }
+  // Disk Type
+  getDiskType() {
+    if (localStorage.getItem("disk_type")) {
+      this.disk_type_value.innerHTML = localStorage.getItem("disk_type")
+    } else {
+      this.sys_info.diskLayout().then((disk_type) => {
+        this.setValueItem("disk_type", disk_type[0].type)
+        this.disk_type_value.innerHTML = localStorage.getItem("disk_type")
+      })
+    }
+  }
+  // Disk Model
+  getDiskModel() {
+    if (localStorage.getItem("disk_model")) {
+      this.disk_model_value.innerHTML = localStorage.getItem("disk_model")
+    } else {
+      this.sys_info.diskLayout().then((disk_model) => {
+        this.setValueItem("disk_model", disk_model[0].name)
+        this.disk_model_value.innerHTML = localStorage.getItem("disk_model")
+      })
+    }
+  }
+  // Disk Vendor
+  getDiskVendor() {
+    if (localStorage.getItem("disk_vendor")) {
+      this.disk_vendor_value.innerHTML = localStorage.getItem("disk_vendor")
+    } else {
+      this.sys_info.diskLayout().then((disk_vendor) => {
+        this.setValueItem("disk_vendor", disk_vendor[0].vendor)
+        this.disk_vendor_value.innerHTML = localStorage.getItem("disk_vendor")
+      })
+    }
+  }
+  // Has Battery
+  getBatteryInfo() {
+    if (localStorage.getItem("has_battery")) {
+      this.has_battery_value.innerHTML = localStorage.getItem("has_battery")
+    } else {
+      this.sys_info.battery().then((has_battery) => {
+        this.setValueItem("has_battery", has_battery.hasBattery)
+        this.has_battery_value.innerHTML = localStorage.getItem("has_battery")
+      })
     }
   }
 }
