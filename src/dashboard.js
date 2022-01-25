@@ -23,9 +23,13 @@ class dashboard {
     this.getCpuName()
     // TOTAL MEMORY
     this.getTotalMemory()
+    // DISK TYPE
     this.getDiskType()
+    // DISK MODEL
     this.getDiskModel()
+    // DISK VENDOR
     this.getDiskVendor()
+    // HAS BATTERY
     this.getBatteryInfo()
   }
   // LocalStorage setItem
@@ -98,7 +102,7 @@ class dashboard {
       });
     }
   }
-  // Disk Type
+
   getDiskType() {
     if (localStorage.getItem("disk_type")) {
       this.disk_type_value.innerHTML = localStorage.getItem("disk_type")
@@ -109,7 +113,7 @@ class dashboard {
       })
     }
   }
-  // Disk Model
+
   getDiskModel() {
     if (localStorage.getItem("disk_model")) {
       this.disk_model_value.innerHTML = localStorage.getItem("disk_model")
@@ -120,7 +124,7 @@ class dashboard {
       })
     }
   }
-  // Disk Vendor
+
   getDiskVendor() {
     if (localStorage.getItem("disk_vendor")) {
       this.disk_vendor_value.innerHTML = localStorage.getItem("disk_vendor")
@@ -131,7 +135,7 @@ class dashboard {
       })
     }
   }
-  // Has Battery
+
   getBatteryInfo() {
     if (localStorage.getItem("has_battery")) {
       this.has_battery_value.innerHTML = localStorage.getItem("has_battery")
