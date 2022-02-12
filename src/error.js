@@ -3,6 +3,7 @@ class error {
         this.exec = require("child_process").exec
         this.path = require("path")
         this.dialog = require("electron").dialog
+        this.app = require("electron").app
 
         this.errorDialog()
     }
@@ -20,6 +21,10 @@ class error {
                     detail: "It seems, that you have AMD cpu. This App works only now with Intel CPUs",
                     buttons: ["Ok"],
                     icon: this.path.join(__dirname, "../public/icon/boostChanger.png")
+                }).then((ok) => {
+                    if(ok.response === 0) {
+                        this.app.quit()
+                    }
                 })
 
             } else {
@@ -34,6 +39,10 @@ class error {
                             detail: "It seems, that you have an old Intel CPU. This App works only now on a modern Intel CPUs",
                             buttons: ["Ok"],
                             icon: this.path.join(__dirname, "../public/icon/boostChanger.png")
+                        }).then((ok) => {
+                            if (ok.response === 0) {
+                                this.app.quit()
+                            }
                         })
                     } else {
                         // User uses VM
@@ -46,7 +55,7 @@ class error {
                             icon: this.path.join(__dirname, "../public/icon/boostChanger.png")
                         }).then((ok) => {
                             if (ok.response === 0) {
-                                app.quit()
+                                this.app.quit()
                             }
                         })
                     }
