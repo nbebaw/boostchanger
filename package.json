@@ -46,12 +46,12 @@
   "author": "nbebaw",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^17.0.0",
-    "electron-builder": "^22.14.13"
+    "electron": "^18.2.0",
+    "electron-builder": "^23.0.3"
   },
   "dependencies": {
-    "electron-updater": "^4.6.5",
+    "electron-updater": "^5.0.1",
     "electron-window-state": "^5.0.3",
-    "systeminformation": "^5.11.2"
+    "systeminformation": "^5.11.14"
   }
 }
