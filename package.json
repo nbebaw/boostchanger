@@ -1,6 +1,6 @@
 {
   "name": "boostchanger",
-  "version": "4.5.0",
+  "version": "4.6.0",
   "description": "With this app you can control CPU turbo boost and the settings of the cpu speed in order to consuming less battery voltage.",
   "main": "src/main.js",
   "scripts": {
@@ -46,12 +46,12 @@
   "author": "nbebaw",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^19.0.4",
-    "electron-builder": "^23.0.3"
+    "electron": "^19.0.8",
+    "electron-builder": "^23.1.0"
   },
   "dependencies": {
-    "electron-updater": "^5.0.1",
+    "electron-updater": "^5.0.5",
     "electron-window-state": "^5.0.3",
-    "systeminformation": "^5.11.21"
+    "systeminformation": "^5.11.24"
   }
 }
