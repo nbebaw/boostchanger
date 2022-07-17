@@ -286,3 +286,8 @@ li.active {
 .alert-box {
     text-align: left;
 }
+
+.disable-element {
+    opacity: .5;
+    pointer-events: none;
+}

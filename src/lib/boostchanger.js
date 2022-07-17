@@ -4,7 +4,7 @@ class boostchanger {
         this.fs = require("fs")
         this.exec = require("child_process").exec
     }
-    // exec function
+
     /**
      * Execute CMD commands 
      * @param {String} cmd 
@@ -19,6 +19,7 @@ class boostchanger {
             callback(stdout)
         })
     }
+
     /**
      * This function is for intel turbo Boost 
      * @param {String} file turbo boost file in the kernel
@@ -54,6 +55,7 @@ class boostchanger {
             });
         });
     }
+
     /**
      * This function is for AMD turbo Boost 
      * @param {String} file turbo boost file in the kernel
@@ -87,6 +89,128 @@ class boostchanger {
                     })
                 }
             });
+        });
+    }
+
+    /**
+    * change preferences settings of CPU
+    * @param {String} file cpufreq file in the kernel
+    */
+    perf_settings_intel(file) {
+        var badgeTag = document.getElementById("bdg");
+        var max_perf = this.readline.createInterface({
+            input: this.fs.createReadStream(
+                file
+            ),
+        });
+        // function checked which state has no_turbo 0 or 1 when user starts this app.
+        max_perf.on("line", (line) => {
+            if (line == 30) {
+                badgeTag.innerHTML = " Power Save";
+            } else if (line == 50) {
+                badgeTag.innerHTML = " Balance";
+            } else if (line == 70) {
+                badgeTag.innerHTML = " Performance";
+            } else {
+                badgeTag.innerHTML = " Ultra";
+            }
+        });
+        document.getElementById("btn-save").addEventListener("click", () => {
+            this.os_func("echo 30 | pkexec tee " + file, () => {
+                // show notification after command is executed
+                new Notification("Boost Changer", {
+                    body: "Mode: Power Save",
+                });
+                badgeTag.innerHTML = "Power Save"
+            })
+        });
+        document.getElementById("btn-balance").addEventListener("click", () => {
+            this.os_func("echo 50 | pkexec tee " + file, () => {
+                // show notification after command is executed
+                new Notification("Boost Changer", {
+                    body: "Mode: Balance",
+                });
+                badgeTag.innerHTML = "Balance"
+            })
+        });
+        document.getElementById("btn-perf").addEventListener("click", () => {
+            this.os_func("echo 70 | pkexec tee " + file, () => {
+                // show notification after command is executed
+                new Notification("Boost Changer", {
+                    body: "Mode: Performance",
+                });
+                badgeTag.innerHTML = "Performance"
+            })
+        });
+        document.getElementById("btn-ultra").addEventListener("click", () => {
+            this.os_func("echo 100 | pkexec tee " + file, () => {
+                // show notification after command is executed
+                new Notification("Boost Changer", {
+                    body: "Mode: Ultra",
+                });
+                badgeTag.innerHTML = "Ultra"
+            })
+        });
+    }
+
+    /**
+    * change preferences settings of CPU
+    * @param {String} file cpufreq file in the kernel
+    */
+    perf_settings_AMD(file) {
+        var badgeTag = document.getElementById("bdg");
+        var max_perf = this.readline.createInterface({
+            input: this.fs.createReadStream(
+                file
+            ),
+        });
+        // function checked which state has no_turbo 0 or 1 when user starts this app.
+        max_perf.on("line", (line) => {
+            if (line == "Conservative") {
+                badgeTag.innerHTML = " Power Save";
+            } else if (line == "Powersave") {
+                badgeTag.innerHTML = " Balance";
+            } else if (line == "Performance") {
+                badgeTag.innerHTML = " Performance";
+            } else {
+                badgeTag.innerHTML = " Ultra";
+            }
+        });
+        document.getElementById("btn-save").addEventListener("click", () => {
+            this.os_func("echo conservative | pkexec tee " + file, () => {
+                // show notification after command is executed
+                new Notification("Boost Changer", {
+                    body: "Mode: Power Save",
+                });
+                badgeTag.innerHTML = "Power Save"
+            })
+        });
+        document.getElementById("btn-balance").addEventListener("click", () => {
+            this.os_func("echo powersave | pkexec tee " + file, () => {
+                // show notification after command is executed
+                new Notification("Boost Changer", {
+                    body: "Mode: Balance",
+                });
+                badgeTag.innerHTML = "Balance"
+            })
+        });
+        document.getElementById("btn-perf").addEventListener("click", () => {
+            this.os_func("echo performance | pkexec tee " + file, () => {
+                // show notification after command is executed
+                new Notification("Boost Changer", {
+                    body: "Mode: Performance",
+                });
+                badgeTag.innerHTML = "Performance"
+            })
+        });
+        document.getElementById("btn-ultra").addEventListener("click", () => {
+            this.os_func("echo schedutil | pkexec tee " + file, () => {
+                // show notification after command is executed
+                new Notification("Boost Changer", {
+                    body: "Mode: Ultra",
+                });
+                badgeTag.innerHTML = "Ultra"
+            })
         });
     }
 }
