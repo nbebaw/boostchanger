@@ -4,10 +4,9 @@ class cpuSettings {
     this.readline = require("readline")
     this.sys_info = require("systeminformation")
     this.exec = require("child_process").exec
-
+    this.boostchanger = require("./lib/boostchanger").lib
+    this.intelOrAMD()
     this.getCpuSpeed()
-    this.turboBoost()
-    this.perf_settings()
   }
 
   // exec function
@@ -18,6 +17,20 @@ class cpuSettings {
         return;
       }
       callback(stdout)
+    })
+  }
+
+  intelOrAMD() {
+    this.os_func("cat /proc/cpuinfo | grep -m1 'vendor_id' | awk '{ print $3 }'", (vendor) => {
+      // show notification after command is executed
+      var vendor_name = vendor.trim();
+      if (vendor_name == "GenuineIntel") {
+        this.boostchanger.turboBoost_Intel("/sys/devices/system/cpu/intel_pstate/no_turbo");
+        this.perf_settings(true);
+      } else {
+        this.boostchanger.turboBoost_AMD("/sys/devices/system/cpu/cpufreq/boost");
+        document.getElementById("cpu-perf-container").style.display = none;
+      }
     })
   }
 
@@ -36,92 +49,66 @@ class cpuSettings {
     }, 1000);
   }
 
-  turboBoost() {
-    var no_turbo = this.readline.createInterface({
-      input: this.fs.createReadStream("/sys/devices/system/cpu/intel_pstate/no_turbo"),
-    });
-    // function checked which state has no_turbo 0 or 1 when user starts this app.
-    no_turbo.on("line", (line) => {
-      if (line == 0) {
-        document.getElementById("turbo_toggle").checked = true;
-      } else {
-        document.getElementById("turbo_toggle").checked = false;
-      }
-      document.getElementById("toggle_change").addEventListener("change", () => {
-        var turbo_toggle = document.getElementById("turbo_toggle");
-        if (turbo_toggle.checked == false) {
-          this.os_func("echo 1 | pkexec tee /sys/devices/system/cpu/intel_pstate/no_turbo", () => {
-            // show notification after command is executed
-            new Notification("Boost Changer", {
-              body: "Turbo Boost is now OFF",
-            });
-          })
+  perf_settings(intelOrAMD) {
+    if (intelOrAMD) {
+      var badgeTag = document.getElementById("bdg");
+      var max_perf = this.readline.createInterface({
+        input: this.fs.createReadStream(
+          "/sys/devices/system/cpu/intel_pstate/max_perf_pct"
+        ),
+      });
+      // function checked which state has no_turbo 0 or 1 when user starts this app.
+      max_perf.on("line", (line) => {
+        if (line == 30) {
+          badgeTag.innerHTML = " Power Save";
+        } else if (line == 50) {
+          badgeTag.innerHTML = " Balance";
+        } else if (line == 70) {
+          badgeTag.innerHTML = " Performance";
         } else {
-          this.os_func("echo 0 | pkexec tee /sys/devices/system/cpu/intel_pstate/no_turbo", () => {
-            // show notification after command is executed
-            new Notification("Boost Changer", {
-              body: "Turbo Boost is now ON",
-            });
-          })
+          badgeTag.innerHTML = " Ultra";
         }
       });
-    });
-  }
-  perf_settings() {
-    var badgeTag = document.getElementById("bdg");
-    var max_perf = this.readline.createInterface({
-      input: this.fs.createReadStream(
-        "/sys/devices/system/cpu/intel_pstate/max_perf_pct"
-      ),
-    });
-    // function checked which state has no_turbo 0 or 1 when user starts this app.
-    max_perf.on("line", (line) => {
-      if (line == 30) {
-        badgeTag.innerHTML = " Power Save";
-      } else if (line == 50) {
-        badgeTag.innerHTML = " Balance";
-      } else if (line == 70) {
-        badgeTag.innerHTML = " Performance";
-      } else {
-        badgeTag.innerHTML = " Ultra";
-      }
-    });
-    document.getElementById("btn-save").addEventListener("click", () => {
-      this.os_func("echo 30 | pkexec tee /sys/devices/system/cpu/intel_pstate/max_perf_pct", () => {
-        // show notification after command is executed
-        new Notification("Boost Changer", {
-          body: "Mode: Power Save",
-        });
-        badgeTag.innerHTML = "Power Save"
-      })
-    });
-    document.getElementById("btn-balance").addEventListener("click", () => {
-      this.os_func("echo 50 | pkexec tee /sys/devices/system/cpu/intel_pstate/max_perf_pct", () => {
-        // show notification after command is executed
-        new Notification("Boost Changer", {
-          body: "Mode: Balance",
-        });
-        badgeTag.innerHTML = "Balance"
-      })
-    });
-    document.getElementById("btn-perf").addEventListener("click", () => {
-      this.os_func("echo 70 | pkexec tee /sys/devices/system/cpu/intel_pstate/max_perf_pct", () => {
-        // show notification after command is executed
-        new Notification("Boost Changer", {
-          body: "Mode: Performance",
-        });
-        badgeTag.innerHTML = "Performance"
-      })
-    });
-    document.getElementById("btn-ultra").addEventListener("click", () => {
-      this.os_func("echo 100 | pkexec tee /sys/devices/system/cpu/intel_pstate/max_perf_pct", () => {
-        // show notification after command is executed
-        new Notification("Boost Changer", {
-          body: "Mode: Ultra",
-        });
-        badgeTag.innerHTML = "Ultra"
-      })
-    });
+      document.getElementById("btn-save").addEventListener("click", () => {
+        this.os_func("echo 30 | pkexec tee /sys/devices/system/cpu/intel_pstate/max_perf_pct", () => {
+          // show notification after command is executed
+          new Notification("Boost Changer", {
+            body: "Mode: Power Save",
+          });
+          badgeTag.innerHTML = "Power Save"
+        })
+      });
+      document.getElementById("btn-balance").addEventListener("click", () => {
+        this.os_func("echo 50 | pkexec tee /sys/devices/system/cpu/intel_pstate/max_perf_pct", () => {
+          // show notification after command is executed
+          new Notification("Boost Changer", {
+            body: "Mode: Balance",
+          });
+          badgeTag.innerHTML = "Balance"
+        })
+      });
+      document.getElementById("btn-perf").addEventListener("click", () => {
+        this.os_func("echo 70 | pkexec tee /sys/devices/system/cpu/intel_pstate/max_perf_pct", () => {
+          // show notification after command is executed
+          new Notification("Boost Changer", {
+            body: "Mode: Performance",
+          });
+          badgeTag.innerHTML = "Performance"
+        })
+      });
+      document.getElementById("btn-ultra").addEventListener("click", () => {
+        this.os_func("echo 100 | pkexec tee /sys/devices/system/cpu/intel_pstate/max_perf_pct", () => {
+          // show notification after command is executed
+          new Notification("Boost Changer", {
+            body: "Mode: Ultra",
+          });
+          badgeTag.innerHTML = "Ultra"
+        })
+      });
+    } else {
+      // TODO
+    }
   }
 }
+
 module.exports = { cpuSettings }

@@ -5,6 +5,7 @@ const windowStateKeeper = require('electron-window-state');
 const { mainMenu } = require("./mainMenu")
 const { error } = require("./error")
 const fs = require('fs')
+const exec = require("child_process").exec
 
 // define all important variables
 let mainWindow, tray, trayMenu
@@ -69,7 +70,7 @@ function createWindow() {
   mainWindow.once('ready-to-show', mainWindow.show)
 
   // TODO: for DEV Open the DevTools. 
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 
   // clear all local storage data before app starts
   mainWindow.webContents.session.clearStorageData()
@@ -91,13 +92,16 @@ function createWindow() {
 
 app.on('ready', () => {
   //show error when the user uses VM 
-  if (fs.existsSync('/sys/devices/system/cpu/intel_pstate/no_turbo')) {
-    createWindow()
-    // call trayApp function
-    trayApp()
-  } else {
-    new error()
-  }
+  exec("hostnamectl status | grep -m1 'Chassis' | awk '{ print $2 }'", (stderr, stdout) => {
+    if (stderr instanceof Error) { throw stderr; }
+    if (!stdout.includes("vm")) {
+      createWindow()
+      // call trayApp function
+      trayApp()
+    } else {
+      new error()
+    }
+  })
 })
 
 // Quit when all windows are closed.

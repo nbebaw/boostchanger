@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pkgver=4.6.0
+pkgver=5.0.0
 
 if [[ -f /usr/bin/boostchanger ]]
 then
