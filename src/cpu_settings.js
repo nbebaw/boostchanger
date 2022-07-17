@@ -7,7 +7,9 @@ class cpuSettings {
     this.intelOrAMD()
     this.getCpuSpeed()
   }
-
+  /**
+   * This function is to indicate if the user has intel or AMD Processor.
+   */
   intelOrAMD() {
     this.boostchanger.os_func("cat /proc/cpuinfo | grep -m1 'vendor_id' | awk '{ print $3 }'", (vendor) => {
       // show notification after command is executed
@@ -21,7 +23,9 @@ class cpuSettings {
       }
     })
   }
-
+  /**
+   * Get the average CPU Speed and print it to the user
+   */
   getCpuSpeed() {
     // Get CPU speed for the first time
     this.sys_info.cpuCurrentSpeed().then((cpu_speed) => {
@@ -36,7 +40,10 @@ class cpuSettings {
       });
     }, 1000);
   }
-
+  /**
+   * change preferences settings of CPU
+   * @param {Boolean} intelOrAMD 
+   */
   perf_settings(intelOrAMD) {
     if (intelOrAMD) {
       var badgeTag = document.getElementById("bdg");

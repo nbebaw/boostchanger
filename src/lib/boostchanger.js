@@ -5,6 +5,11 @@ class boostchanger {
         this.exec = require("child_process").exec
     }
     // exec function
+    /**
+     * Execute CMD commands 
+     * @param {String} cmd 
+     * @param {Function} callback 
+     */
     os_func(cmd, callback) {
         this.exec(cmd, (error, stdout, stderr) => {
             if (error) {
@@ -14,6 +19,10 @@ class boostchanger {
             callback(stdout)
         })
     }
+    /**
+     * This function is for intel turbo Boost 
+     * @param {String} file turbo boost file in the kernel
+     */
     turboBoost_Intel(file) {
         var no_turbo = this.readline.createInterface({
             input: this.fs.createReadStream(file),
@@ -45,6 +54,10 @@ class boostchanger {
             });
         });
     }
+    /**
+     * This function is for AMD turbo Boost 
+     * @param {String} file turbo boost file in the kernel
+     */
     turboBoost_AMD(file) {
         var no_turbo = this.readline.createInterface({
             input: this.fs.createReadStream(file),
