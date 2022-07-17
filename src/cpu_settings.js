@@ -3,25 +3,13 @@ class cpuSettings {
     this.fs = require("fs")
     this.readline = require("readline")
     this.sys_info = require("systeminformation")
-    this.exec = require("child_process").exec
     this.boostchanger = require("./lib/boostchanger").lib
     this.intelOrAMD()
     this.getCpuSpeed()
   }
 
-  // exec function
-  os_func(cmd, callback) {
-    this.exec(cmd, (error, stdout, stderr) => {
-      if (error) {
-        console.error(`exec error: ${error}`);
-        return;
-      }
-      callback(stdout)
-    })
-  }
-
   intelOrAMD() {
-    this.os_func("cat /proc/cpuinfo | grep -m1 'vendor_id' | awk '{ print $3 }'", (vendor) => {
+    this.boostchanger.os_func("cat /proc/cpuinfo | grep -m1 'vendor_id' | awk '{ print $3 }'", (vendor) => {
       // show notification after command is executed
       var vendor_name = vendor.trim();
       if (vendor_name == "GenuineIntel") {
@@ -70,7 +58,7 @@ class cpuSettings {
         }
       });
       document.getElementById("btn-save").addEventListener("click", () => {
-        this.os_func("echo 30 | pkexec tee /sys/devices/system/cpu/intel_pstate/max_perf_pct", () => {
+        this.boostchanger.os_func("echo 30 | pkexec tee /sys/devices/system/cpu/intel_pstate/max_perf_pct", () => {
           // show notification after command is executed
           new Notification("Boost Changer", {
             body: "Mode: Power Save",
@@ -79,7 +67,7 @@ class cpuSettings {
         })
       });
       document.getElementById("btn-balance").addEventListener("click", () => {
-        this.os_func("echo 50 | pkexec tee /sys/devices/system/cpu/intel_pstate/max_perf_pct", () => {
+        this.boostchanger.os_func("echo 50 | pkexec tee /sys/devices/system/cpu/intel_pstate/max_perf_pct", () => {
           // show notification after command is executed
           new Notification("Boost Changer", {
             body: "Mode: Balance",
@@ -88,7 +76,7 @@ class cpuSettings {
         })
       });
       document.getElementById("btn-perf").addEventListener("click", () => {
-        this.os_func("echo 70 | pkexec tee /sys/devices/system/cpu/intel_pstate/max_perf_pct", () => {
+        this.boostchanger.os_func("echo 70 | pkexec tee /sys/devices/system/cpu/intel_pstate/max_perf_pct", () => {
           // show notification after command is executed
           new Notification("Boost Changer", {
             body: "Mode: Performance",
@@ -97,7 +85,7 @@ class cpuSettings {
         })
       });
       document.getElementById("btn-ultra").addEventListener("click", () => {
-        this.os_func("echo 100 | pkexec tee /sys/devices/system/cpu/intel_pstate/max_perf_pct", () => {
+        this.boostchanger.os_func("echo 100 | pkexec tee /sys/devices/system/cpu/intel_pstate/max_perf_pct", () => {
           // show notification after command is executed
           new Notification("Boost Changer", {
             body: "Mode: Ultra",
