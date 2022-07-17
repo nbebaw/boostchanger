@@ -29,7 +29,7 @@ class cpuSettings {
         this.perf_settings(true);
       } else {
         this.boostchanger.turboBoost_AMD("/sys/devices/system/cpu/cpufreq/boost");
-        document.getElementById("cpu-perf-container").style.display = none;
+        document.getElementById("cpu-perf-container").style.display = "none";
       }
     })
   }
