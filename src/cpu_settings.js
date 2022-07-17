@@ -17,7 +17,7 @@ class cpuSettings {
         this.boostchanger.perf_settings_intel("/sys/devices/system/cpu/intel_pstate/max_perf_pct");
       } else {
         this.boostchanger.turboBoost_AMD("/sys/devices/system/cpu/cpufreq/boost");
-        this.boostchanger.perf_settings_AMD("/sys/devices/system/cpu/cpu*/cpufreq/scaling_governor");
+        this.boostchanger.perf_settings_AMD("/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor", "/sys/devices/system/cpu/cpu*/cpufreq/scaling_governor");
       }
     })
   }

@@ -157,7 +157,7 @@ class boostchanger {
     * change preferences settings of CPU
     * @param {String} file cpufreq file in the kernel
     */
-    perf_settings_AMD(file) {
+    perf_settings_AMD(file, allCPUs) {
         var badgeTag = document.getElementById("bdg");
         var max_perf = this.readline.createInterface({
             input: this.fs.createReadStream(
@@ -166,18 +166,18 @@ class boostchanger {
         });
         // function checked which state has no_turbo 0 or 1 when user starts this app.
         max_perf.on("line", (line) => {
-            if (line == "Conservative") {
+            if (line == "conservative") {
                 badgeTag.innerHTML = " Power Save";
-            } else if (line == "Powersave") {
+            } else if (line == "powersave") {
                 badgeTag.innerHTML = " Balance";
-            } else if (line == "Performance") {
+            } else if (line == "performance") {
                 badgeTag.innerHTML = " Performance";
             } else {
                 badgeTag.innerHTML = " Ultra";
             }
         });
         document.getElementById("btn-save").addEventListener("click", () => {
-            this.os_func("echo conservative | pkexec tee " + file, () => {
+            this.os_func("echo conservative | pkexec tee " + allCPUs, () => {
                 // show notification after command is executed
                 new Notification("Boost Changer", {
                     body: "Mode: Power Save",
@@ -186,7 +186,7 @@ class boostchanger {
             })
         });
         document.getElementById("btn-balance").addEventListener("click", () => {
-            this.os_func("echo powersave | pkexec tee " + file, () => {
+            this.os_func("echo powersave | pkexec tee " + allCPUs, () => {
                 // show notification after command is executed
                 new Notification("Boost Changer", {
                     body: "Mode: Balance",
@@ -195,7 +195,7 @@ class boostchanger {
             })
         });
         document.getElementById("btn-perf").addEventListener("click", () => {
-            this.os_func("echo performance | pkexec tee " + file, () => {
+            this.os_func("echo performance | pkexec tee " + allCPUs, () => {
                 // show notification after command is executed
                 new Notification("Boost Changer", {
                     body: "Mode: Performance",
@@ -204,7 +204,7 @@ class boostchanger {
             })
         });
         document.getElementById("btn-ultra").addEventListener("click", () => {
-            this.os_func("echo schedutil | pkexec tee " + file, () => {
+            this.os_func("echo schedutil | pkexec tee " + allCPUs, () => {
                 // show notification after command is executed
                 new Notification("Boost Changer", {
                     body: "Mode: Ultra",
