@@ -5,6 +5,7 @@ class mainMenu {
         this.path = require("path")
         this.appVersion = "v" + require("../package.json").version
         this.appDescription = require("../package.json").description
+        this.boostchanger = require("./lib/boostchanger").lib
 
         this.menuTemplate()
     }

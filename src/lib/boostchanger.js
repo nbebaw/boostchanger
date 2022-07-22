@@ -155,7 +155,8 @@ class boostchanger {
 
     /**
     * change preferences settings of CPU
-    * @param {String} file cpufreq file in the kernel
+    * @param {String} file cpufreq file in the kernel for one CPU
+    * @param {String} allCPUs cpufreq file in the kernel for all CPUs
     */
     perf_settings_AMD(file, allCPUs) {
         var badgeTag = document.getElementById("bdg");
