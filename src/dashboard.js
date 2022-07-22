@@ -8,29 +8,10 @@ class dashboard {
     this.cpu_name_value = document.getElementById("cpu_name")
     this.mem_total_value = document.getElementById("mem_total")
     this.disk_type_value = document.getElementById("disk_type")
-    this.disk_model_value = document.getElementById("disk_model")
+    this.disk_size_value = document.getElementById("disk_size")
     this.disk_vendor_value = document.getElementById("disk_vendor")
     this.has_battery_value = document.getElementById("has_battery")
     this.sys_info = require("systeminformation")
-
-    // OS_NAME
-    // this.getOsName()
-    // KERNEL
-    // this.getKernel()
-    // // UP TIME
-    // this.getUpTime()
-    // // CPU NAME
-    // this.getCpuName()
-    // // TOTAL MEMORY
-    // this.getTotalMemory()
-    // // DISK TYPE
-    // this.getDiskType()
-    // // DISK MODEL
-    // this.getDiskModel()
-    // // DISK VENDOR
-    // this.getDiskVendor()
-    // // HAS BATTERY
-    // this.getBatteryInfo()
 
     this.getAllValues()
   }
@@ -66,18 +47,20 @@ class dashboard {
       this.getSetItems(this.cpu_name_value, "cpu_name", data.cpu.manufacturer + " " + data.cpu.brand + " " + data.cpu.speed + " GHz")
       // TOTAL MEMORY
       this.getSetItems(this.mem_total_value, "mem_total", (data.mem.total / Math.pow(1000, 3)).toFixed(0) + " GB")
-
+      // DISK INFORMATIONS
       var diskType = [];
-      var diskModel = [];
       var diskVendor = [];
+      var diskSize = [];
       data.diskLayout.forEach(element => {
         diskType.push(element.type)
-        diskModel.push(element.name)
         diskVendor.push(element.vendor)
+        diskSize.push((element.size / Math.pow(1000, 3)).toFixed(0) + " GB")
+        
       });
       this.getSetItems(this.disk_type_value, "disk_type", diskType.join(", "))
-      this.getSetItems(this.disk_model_value, "disk_model", diskModel.join(", "))
+      this.getSetItems(this.disk_size_value, "disk_size", diskSize.join(", "))
       this.getSetItems(this.disk_vendor_value, "disk_vendor", diskVendor.join(", "))
+      // HAS BATTERY
       this.getSetItems(this.has_battery_value, "has_battery", data.battery.hasBattery)
     });
   }
