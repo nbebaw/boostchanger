@@ -14,94 +14,138 @@ class dashboard {
     this.sys_info = require("systeminformation")
 
     // OS_NAME
-    this.getOsName()
+    // this.getOsName()
     // KERNEL
-    this.getKernel()
-    // UP TIME
-    this.getUpTime()
-    // CPU NAME
-    this.getCpuName()
-    // TOTAL MEMORY
-    this.getTotalMemory()
-    // DISK TYPE
-    this.getDiskType()
-    // DISK MODEL
-    this.getDiskModel()
-    // DISK VENDOR
-    this.getDiskVendor()
-    // HAS BATTERY
-    this.getBatteryInfo()
-  }
-  // LocalStorage setItem
-  setValueItem(key_name, value_name) {
-    localStorage.setItem(key_name, value_name)
+    // this.getKernel()
+    // // UP TIME
+    // this.getUpTime()
+    // // CPU NAME
+    // this.getCpuName()
+    // // TOTAL MEMORY
+    // this.getTotalMemory()
+    // // DISK TYPE
+    // this.getDiskType()
+    // // DISK MODEL
+    // this.getDiskModel()
+    // // DISK VENDOR
+    // this.getDiskVendor()
+    // // HAS BATTERY
+    // this.getBatteryInfo()
+
+    this.getAllValues()
   }
 
-  getOsName() {
-    if (localStorage.getItem("os_name")) {
-      this.os_name_value.innerHTML = localStorage.getItem("os_name");
+  getSetItems(html_element, target, data) {
+    if (localStorage.getItem(target)) {
+      html_element.innerHTML = localStorage.getItem(target);
     } else {
-      this.sys_info.osInfo().then((os_name) => {
-        this.setValueItem("os_name", os_name.distro)
-        this.os_name_value.innerHTML = localStorage.getItem("os_name");
+      localStorage.setItem(target, data)
+      html_element.innerHTML = localStorage.getItem(target);
+    }
+  }
+
+  getAllValues() {
+    // define all values, you want to get back
+    var valueObject = {
+      cpu: 'manufacturer, brand, speed',
+      osInfo: 'distro, kernel',
+      time: 'uptime',
+      mem: 'total',
+      diskLayout: '*',
+      battery: '*'
+    }
+
+    this.sys_info.get(valueObject).then(data => {
+      // OS NAME
+      this.getSetItems(this.os_name_value, "os_name", data.osInfo.distro)
+      // KERNEL VERSION
+      this.getSetItems(this.kernel_name_value, "kernel", data.osInfo.kernel)
+      // UP TIME
+      this.getSetItems(this.up_time_value, "up_time", (data.time.uptime/3600).toFixed(2) + " Hours")
+      // CPU NAME
+      this.getSetItems(this.cpu_name_value, "cpu_name", data.cpu. manufacturer + " " + data.cpu.brand + " " + data.cpu.speed + " GHz")
+      // TOTAL MEMORY
+      this.getSetItems(this.mem_total_value, "mem_total", (data.mem.total / Math.pow(1000, 3)).toFixed(0) + " GB")
+      console.log(data.diskLayout);
+      console.log(data.battery);
+      data.diskLayout.forEach(element => {
+        console.log(element.type);
+        console.log(element.vendor);
+        console.log((element.size / Math.pow(1000, 3)).toFixed(0) + " GB");
       });
-    }
+      
+    });
   }
+  // // LocalStorage setItem
+  // setValueItem(key_name, value_name) {
+    
+  // }
 
-  getKernel() {
-    if (localStorage.getItem("kernel")) {
-      this.kernel_name_value.innerHTML = localStorage.getItem("kernel");
-    } else {
-      this.sys_info.osInfo().then((kernel) => {
-        this.setValueItem("kernel", kernel.kernel)
-        this.kernel_name_value.innerHTML = localStorage.getItem("kernel");
-      });
-    }
-  }
+  // getOsName() {
+  //   if (localStorage.getItem("os_name")) {
+  //     this.os_name_value.innerHTML = localStorage.getItem("os_name");
+  //   } else {
+  //     this.sys_info.osInfo().then((os_name) => {
+  //       this.setValueItem("os_name", os_name.distro)
+  //       this.os_name_value.innerHTML = localStorage.getItem("os_name");
+  //     });
+  //   }
+  // }
 
-  getUpTime() {
-    if (localStorage.getItem("up_time")) {
-      this.up_time_value.innerHTML = localStorage.getItem("up_time");
-    } else {
-      var timeInSec = this.sys_info.time().uptime; // time will be in Sec
-      var timeInHour = timeInSec / 3600; // change time from Sec to Hours
-      var timeResult = timeInHour.toFixed(2) + " Hours";
-      this.setValueItem("up_time", timeResult)
-      this.up_time_value.innerHTML = localStorage.getItem("up_time");
-    }
-  }
+  // getKernel() {
+  //   if (localStorage.getItem("kernel")) {
+  //     this.kernel_name_value.innerHTML = localStorage.getItem("kernel");
+  //   } else {
+  //     this.sys_info.osInfo().then((kernel) => {
+  //       this.setValueItem("kernel", kernel.kernel)
+  //       this.kernel_name_value.innerHTML = localStorage.getItem("kernel");
+  //     });
+  //   }
+  // }
 
-  getCpuName() {
-    if (localStorage.getItem("cpu_name")) {
-      this.cpu_name_value.innerHTML = localStorage.getItem("cpu_name");
-    } else {
-      this.sys_info.cpu().then((cpu_name) => {
-        var cpuname =
-          cpu_name.manufacturer +
-          " " +
-          cpu_name.brand +
-          " " +
-          cpu_name.speed +
-          "GHz";
-        this.setValueItem("cpu_name", cpuname)
-        this.cpu_name_value.innerHTML = localStorage.getItem("cpu_name");
-      });
-    }
-  }
+  // getUpTime() {
+  //   if (localStorage.getItem("up_time")) {
+  //     this.up_time_value.innerHTML = localStorage.getItem("up_time");
+  //   } else {
+  //     var timeInSec = this.sys_info.time().uptime; // time will be in Sec
+  //     var timeInHour = timeInSec / 3600; // change time from Sec to Hours
+  //     var timeResult = timeInHour.toFixed(2) + " Hours";
+  //     this.setValueItem("up_time", timeResult)
+  //     this.up_time_value.innerHTML = localStorage.getItem("up_time");
+  //   }
+  // }
 
-  getTotalMemory() {
-    if (localStorage.getItem("mem_total")) {
-      this.mem_total_value.innerHTML = localStorage.getItem("mem_total");
-    } else {
-      this.sys_info.mem().then((total_memory) => {
-        var total_memoryInByte = total_memory.total;
-        var total_memoryInGB = total_memoryInByte / Math.pow(1024, 3);
-        var total = total_memoryInGB.toFixed(0) + " GB";
-        this.setValueItem("mem_total", total)
-        this.mem_total_value.innerHTML = localStorage.getItem("mem_total");
-      });
-    }
-  }
+  // getCpuName() {
+  //   if (localStorage.getItem("cpu_name")) {
+  //     this.cpu_name_value.innerHTML = localStorage.getItem("cpu_name");
+  //   } else {
+  //     this.sys_info.cpu().then((cpu_name) => {
+  //       var cpuname =
+  //         cpu_name.manufacturer +
+  //         " " +
+  //         cpu_name.brand +
+  //         " " +
+  //         cpu_name.speed +
+  //         "GHz";
+  //       this.setValueItem("cpu_name", cpuname)
+  //       this.cpu_name_value.innerHTML = localStorage.getItem("cpu_name");
+  //     });
+  //   }
+  // }
+
+  // getTotalMemory() {
+  //   if (localStorage.getItem("mem_total")) {
+  //     this.mem_total_value.innerHTML = localStorage.getItem("mem_total");
+  //   } else {
+  //     this.sys_info.mem().then((total_memory) => {
+  //       var total_memoryInByte = total_memory.total;
+  //       var total_memoryInGB = total_memoryInByte / Math.pow(1024, 3);
+  //       var total = total_memoryInGB.toFixed(0) + " GB";
+  //       this.setValueItem("mem_total", total)
+  //       this.mem_total_value.innerHTML = localStorage.getItem("mem_total");
+  //     });
+  //   }
+  // }
 
   getDiskType() {
     if (localStorage.getItem("disk_type")) {
