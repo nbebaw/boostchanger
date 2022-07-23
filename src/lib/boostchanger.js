@@ -1,8 +1,10 @@
+const { ipcRenderer } = require("electron");
 class boostchanger {
     constructor() {
         this.readline = require("readline")
         this.fs = require("fs")
         this.exec = require("child_process").exec
+        this.dialog = require("electron").dialog
     }
 
     /**
@@ -18,6 +20,13 @@ class boostchanger {
             }
             callback(stdout)
         })
+    }
+    /**
+     * 
+     * @param {String} badgeTag for Example: Ultra, Balance etc.. 
+     */
+    already_clicked(bdg) {
+        ipcRenderer.invoke("showDialog", `The actual CPU preferences is already ${bdg}`);
     }
 
     /**
@@ -116,40 +125,60 @@ class boostchanger {
             }
         });
         document.getElementById("btn-save").addEventListener("click", () => {
-            this.os_func("echo 30 | pkexec tee " + file, () => {
-                // show notification after command is executed
-                new Notification("Boost Changer", {
-                    body: "Mode: Power Save",
-                });
-                badgeTag.innerHTML = "Power Save"
-            })
+            var bdg = (badgeTag.innerHTML).trim();
+            if (bdg == "Power Save") {
+                this.already_clicked(bdg)
+            } else {
+                this.os_func("echo 30 | pkexec tee " + file, () => {
+                    // show notification after command is executed
+                    new Notification("Boost Changer", {
+                        body: "Mode: Power Save",
+                    });
+                    badgeTag.innerHTML = " Power Save"
+                })
+            }
         });
         document.getElementById("btn-balance").addEventListener("click", () => {
-            this.os_func("echo 50 | pkexec tee " + file, () => {
-                // show notification after command is executed
-                new Notification("Boost Changer", {
-                    body: "Mode: Balance",
-                });
-                badgeTag.innerHTML = "Balance"
-            })
+            var bdg = (badgeTag.innerHTML).trim();
+            if (bdg == "Balance") {
+                this.already_clicked(bdg)
+            } else {
+                this.os_func("echo 50 | pkexec tee " + file, () => {
+                    // show notification after command is executed
+                    new Notification("Boost Changer", {
+                        body: "Mode: Balance",
+                    });
+                    badgeTag.innerHTML = " Balance"
+                })
+            }
         });
         document.getElementById("btn-perf").addEventListener("click", () => {
-            this.os_func("echo 70 | pkexec tee " + file, () => {
-                // show notification after command is executed
-                new Notification("Boost Changer", {
-                    body: "Mode: Performance",
-                });
-                badgeTag.innerHTML = "Performance"
-            })
+            var bdg = (badgeTag.innerHTML).trim();
+            if (bdg == "Performance") {
+                this.already_clicked(bdg)
+            } else {
+                this.os_func("echo 70 | pkexec tee " + file, () => {
+                    // show notification after command is executed
+                    new Notification("Boost Changer", {
+                        body: "Mode: Performance",
+                    });
+                    badgeTag.innerHTML = " Performance"
+                })
+            }
         });
         document.getElementById("btn-ultra").addEventListener("click", () => {
-            this.os_func("echo 100 | pkexec tee " + file, () => {
-                // show notification after command is executed
-                new Notification("Boost Changer", {
-                    body: "Mode: Ultra",
-                });
-                badgeTag.innerHTML = "Ultra"
-            })
+            var bdg = (badgeTag.innerHTML).trim();
+            if (bdg == "Ultra") {
+                this.already_clicked(bdg)
+            } else {
+                this.os_func("echo 100 | pkexec tee " + file, () => {
+                    // show notification after command is executed
+                    new Notification("Boost Changer", {
+                        body: "Mode: Ultra",
+                    });
+                    badgeTag.innerHTML = " Ultra"
+                })
+            }
         });
     }
 
@@ -178,40 +207,60 @@ class boostchanger {
             }
         });
         document.getElementById("btn-save").addEventListener("click", () => {
-            this.os_func("echo conservative | pkexec tee " + allCPUs, () => {
-                // show notification after command is executed
-                new Notification("Boost Changer", {
-                    body: "Mode: Power Save",
-                });
-                badgeTag.innerHTML = "Power Save"
-            })
+            var bdg = (badgeTag.innerHTML).trim();
+            if (bdg == "Power Save") {
+                this.already_clicked(bdg)
+            } else {
+                this.os_func("echo conservative | pkexec tee " + allCPUs, () => {
+                    // show notification after command is executed
+                    new Notification("Boost Changer", {
+                        body: "Mode: Power Save",
+                    });
+                    badgeTag.innerHTML = " Power Save"
+                })
+            }
         });
         document.getElementById("btn-balance").addEventListener("click", () => {
-            this.os_func("echo powersave | pkexec tee " + allCPUs, () => {
-                // show notification after command is executed
-                new Notification("Boost Changer", {
-                    body: "Mode: Balance",
-                });
-                badgeTag.innerHTML = "Balance"
-            })
+            var bdg = (badgeTag.innerHTML).trim();
+            if (bdg == "Balance") {
+                this.already_clicked(bdg)
+            } else {
+                this.os_func("echo powersave | pkexec tee " + allCPUs, () => {
+                    // show notification after command is executed
+                    new Notification("Boost Changer", {
+                        body: "Mode: Balance",
+                    });
+                    badgeTag.innerHTML = " Balance"
+                })
+            }
         });
         document.getElementById("btn-perf").addEventListener("click", () => {
-            this.os_func("echo performance | pkexec tee " + allCPUs, () => {
-                // show notification after command is executed
-                new Notification("Boost Changer", {
-                    body: "Mode: Performance",
-                });
-                badgeTag.innerHTML = "Performance"
-            })
+            var bdg = (badgeTag.innerHTML).trim();
+            if (bdg == "Performance") {
+                this.already_clicked(bdg)
+            } else {
+                this.os_func("echo performance | pkexec tee " + allCPUs, () => {
+                    // show notification after command is executed
+                    new Notification("Boost Changer", {
+                        body: "Mode: Performance",
+                    });
+                    badgeTag.innerHTML = " Performance"
+                })
+            }
         });
         document.getElementById("btn-ultra").addEventListener("click", () => {
-            this.os_func("echo schedutil | pkexec tee " + allCPUs, () => {
-                // show notification after command is executed
-                new Notification("Boost Changer", {
-                    body: "Mode: Ultra",
-                });
-                badgeTag.innerHTML = "Ultra"
-            })
+            var bdg = (badgeTag.innerHTML).trim();
+            if (bdg == "Ultra") {
+                this.already_clicked(bdg)
+            } else {
+                this.os_func("echo schedutil | pkexec tee " + allCPUs, () => {
+                    // show notification after command is executed
+                    new Notification("Boost Changer", {
+                        body: "Mode: Ultra",
+                    });
+                    badgeTag.innerHTML = " Ultra"
+                })
+            }
         });
     }
 }

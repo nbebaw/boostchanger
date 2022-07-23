@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, Tray, Menu } = require('electron')
+const { app, BrowserWindow, Tray, Menu, ipcMain, dialog } = require('electron')
 const path = require('path')
 const windowStateKeeper = require('electron-window-state');
 const { mainMenu } = require("./mainMenu")
@@ -102,6 +102,17 @@ app.on('ready', () => {
       new error()
     }
   })
+
+  ipcMain.handle("showDialog", (e, message) => {
+    var config = {
+      type: "info",
+      buttons: ["Ok"],
+      title: "About",
+      message: 'Oh Sorry',
+      detail: message
+  }
+    dialog.showMessageBox(mainWindow, config);
+});
 })
 
 // Quit when all windows are closed.
