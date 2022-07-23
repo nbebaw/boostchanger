@@ -2,6 +2,7 @@ class cpuSettings {
   constructor() {
     this.sys_info = require("systeminformation")
     this.boostchanger = require("./lib/boostchanger").lib
+    this.intelOrAMDText = document.getElementById("amdOrIntel")
     this.intelOrAMD()
     this.getCpuSpeed()
   }
@@ -15,9 +16,11 @@ class cpuSettings {
       if (vendor_name == "GenuineIntel") {
         this.boostchanger.turboBoost_Intel("/sys/devices/system/cpu/intel_pstate/no_turbo");
         this.boostchanger.perf_settings_intel("/sys/devices/system/cpu/intel_pstate/max_perf_pct");
+        this.intelOrAMDText.innerHTML = "Intel";
       } else {
         this.boostchanger.turboBoost_AMD("/sys/devices/system/cpu/cpufreq/boost");
         this.boostchanger.perf_settings_AMD("/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor", "/sys/devices/system/cpu/cpu*/cpufreq/scaling_governor");
+        this.intelOrAMDText.innerHTML = "AMD";
       }
     })
   }
