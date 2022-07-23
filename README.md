@@ -1,6 +1,6 @@
 # Boost Changer
 
-## Boost Changer is now for AMD and Intel Processors :bangbang: :bangbang:
+## Boost Changer is now for AMD and Intel Processors :bangbang:
 
 ![GitHub](https://img.shields.io/github/license/nbebaw/boostchanger) ![GitHub all releases](https://img.shields.io/github/downloads/nbebaw/boostchanger/total) ![GitHub repo size](https://img.shields.io/github/repo-size/nbebaw/boostchanger) ![GitHub issues](https://img.shields.io/github/issues/nbebaw/boostchanger) ![GitHub closed issues](https://img.shields.io/github/issues-closed/nbebaw/boostchanger) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/nbebaw/boostchanger) ![GitHub last commit](https://img.shields.io/github/last-commit/nbebaw/boostchanger)
 
