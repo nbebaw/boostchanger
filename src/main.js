@@ -107,9 +107,10 @@ app.on('ready', () => {
     var config = {
       type: "info",
       buttons: ["Ok"],
-      title: "About",
+      title: "CPU Settings",
       message: 'Oh Sorry',
-      detail: message
+      detail: message,
+      icon: path.join(__dirname, "../public/icon/boostChanger.png")
   }
     dialog.showMessageBox(mainWindow, config);
 });
