@@ -1,21 +1,23 @@
 # Boost Changer
 
+## Boost Changer is now for AMD and Intel Processors
+
 ![GitHub](https://img.shields.io/github/license/nbebaw/boostchanger) ![GitHub all releases](https://img.shields.io/github/downloads/nbebaw/boostchanger/total) ![GitHub repo size](https://img.shields.io/github/repo-size/nbebaw/boostchanger) ![GitHub issues](https://img.shields.io/github/issues/nbebaw/boostchanger) ![GitHub closed issues](https://img.shields.io/github/issues-closed/nbebaw/boostchanger) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/nbebaw/boostchanger) ![GitHub last commit](https://img.shields.io/github/last-commit/nbebaw/boostchanger)
 
 ## :bangbang: This App is now only for Linux :bangbang:
 
 ### :heavy_exclamation_mark: This App needs root rights. When and why? :heavy_exclamation_mark:
 
-Boost Changer is made to control the frequencies of Intel CPUs. It can also manage the processor's energy consumption through Energy-Performance Preference.
+Boost Changer is made to control the frequencies of the CPUs. It can also manage the processor's energy consumption through Energy-Performance Preference.
 
 In generall this app does not need root rights but when you hit the Turn Off or On button a popup window will ask you about your root password.
 
 #### why?
 
-- In your Kernel there is a file called <code>/sys/devices/system/cpu/intel_pstate/no_turbo</code>.
+- If you have Intel then in your Kernel there is a file called <code>/sys/devices/system/cpu/intel_pstate/no_turbo</code>.
 > To turn off or on your turbo boost you have to change this file and that is what this app does.<br>
 
-- In your Kernel there is a file called <code>/sys/devices/system/cpu/intel_pstate/max_perf_pct</code>.
+- If you have Intel then In your Kernel there is a file called <code>/sys/devices/system/cpu/intel_pstate/max_perf_pct</code>.
 > when you change the energy performance in Boost Changer you have to change this file and that is what this app does.
 
 #### :pushpin: This app will only work on a real machine. :pushpin:
@@ -74,10 +76,7 @@ npm run
 1 = High Prio |  2 = Middle Prio |  3 = Low Prio
 Feature | Prio
 --- | ---
-Add AMD Support | 1
-CPU Frequencies | 1
 GPU Frequencies | 1
-CPU Governor | 2
 [Nvidia PowerMizer Settings](https://www.nvidia.com/en-us/drivers/feature-powermizer/) | 2
 Represent all Infos about the Machine | 2
 Make this App cross Platform | 3
@@ -85,8 +84,8 @@ Make this App cross Platform | 3
 
 <br>
 
-![Dashboard](https://user-images.githubusercontent.com/57049550/105500022-9483ab80-5cc2-11eb-88e1-260d326c0ba0.png)
+![Dashboard](https://user-images.githubusercontent.com/57049550/180617370-22a0519d-49c4-42a3-b203-b42af43a8c8b.png)
 
-![settings](https://user-images.githubusercontent.com/57049550/105500026-95b4d880-5cc2-11eb-96f9-0ab83e7ed054.png)
+![settings](https://user-images.githubusercontent.com/57049550/180617369-ad475dcc-cddf-48e9-ae55-ee189ad0afae.png)
 
-![About](https://user-images.githubusercontent.com/57049550/105500025-95b4d880-5cc2-11eb-9940-7f97a9344080.png)
+![About](https://user-images.githubusercontent.com/57049550/180617368-b06177db-0fd5-474d-b5e0-c816adbf7aa5.png)
