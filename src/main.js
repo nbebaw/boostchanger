@@ -70,7 +70,7 @@ function createWindow() {
   mainWindow.once('ready-to-show', mainWindow.show)
 
   // TODO: for DEV Open the DevTools. 
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 
   // clear all local storage data before app starts
   mainWindow.webContents.session.clearStorageData()
@@ -102,7 +102,7 @@ app.on('ready', () => {
       new error()
     }
   })
-
+  // Get Message from Renderer Process and send the answer
   ipcMain.handle("showDialog", (e, message) => {
     var config = {
       type: "info",

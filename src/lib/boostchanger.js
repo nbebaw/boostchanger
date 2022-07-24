@@ -26,6 +26,7 @@ class boostchanger {
      * @param {String} badgeTag for Example: Ultra, Balance etc.. 
      */
     already_clicked(bdg) {
+        // Send Message to the Main Process
         ipcRenderer.invoke("showDialog", `The actual CPU preference is already ${bdg}`);
     }
 
