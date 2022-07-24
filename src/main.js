@@ -111,11 +111,10 @@ app.on('ready', () => {
       message: 'Oh Sorry',
       detail: message,
       icon: path.join(__dirname, "../public/icon/boostChanger.png")
-  }
+    }
     dialog.showMessageBox(mainWindow, config);
-});
+  });
 })
-
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
   app.quit();
