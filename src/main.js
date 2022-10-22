@@ -48,6 +48,7 @@ function createWindow() {
     title: 'Boost Changer',
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
+      sandbox: false
     },
 
     show: false, //When all the content of the app has been loaded, then the app will show up
