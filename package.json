@@ -46,7 +46,7 @@
   "author": "nbebaw",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^6.1.12",
+    "electron": "^15.5.5",
     "electron-builder": "^22.10.3"
   },
   "dependencies": {
