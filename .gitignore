@@ -16,6 +16,7 @@ dist/
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 GH_TOKEN.txt
+aur
 
 # Runtime data
 pids
