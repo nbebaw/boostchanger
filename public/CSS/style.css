@@ -26,6 +26,7 @@ body {
     background: #fff;
     color: #717171;
     border-bottom: 1px solid #e0e4e8;
+    border-top: 1px solid #e0e4e8;
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-content: center;
