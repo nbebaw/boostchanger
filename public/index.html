@@ -5,27 +5,35 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boost Changer - Dashboard</title>
     <link rel="stylesheet" href="CSS/style.css">
 </head>
 
 <body id="dashboard">
     <div class="container">
-        <div class="nav">
+        <nav class="nav" role="navigation">
             <span class="nav-label">Dashboard</span>
-        </div>
-        <div class="sidebar">
-            <img class="logo" src="icon/boostChanger.png" alt="">
-            <ul class="slider-ul">
-                <li class="active"><a href="#"><img class="icons" src="icon/tachometer.png"></a></li>
-                <li><a href="cpu_settings.html"><img class="icons" src="icon/zahnrad.png"></a></li>
+        </nav>
+        
+        <aside class="sidebar" role="complementary">
+            <img class="logo" src="icon/boostChanger.png" alt="Boost Changer Logo">
+            <ul class="slider-ul" role="menu">
+                <li class="active" role="menuitem">
+                    <a href="#" aria-label="Dashboard" aria-current="page">
+                        <img class="icons" src="icon/tachometer.png" alt="Dashboard icon">
+                    </a>
+                </li>
+                <li role="menuitem">
+                    <a href="cpu_settings.html" aria-label="CPU Settings">
+                        <img class="icons" src="icon/zahnrad.png" alt="Settings icon">
+                    </a>
+                </li>
             </ul>
-            <div>
-                <button class="btn" id="close">Close</button>
-            </div>
-
-        </div>
-        <div class="main-dashboard">
-            <div class="infos">
+            <button class="btn" id="close" aria-label="Close application">Close</button>
+        </aside>
+        
+        <main class="main-dashboard" role="main">
+            <div class="infos" aria-label="System information labels">
                 <p>OS Name:</p>
                 <p>Kernel:</p>
                 <p>Up time:</p>
@@ -36,18 +44,18 @@
                 <p>Disk Vendor:</p>
                 <p>Has Battery:</p>
             </div>
-            <div class="infos-result">
-                <p id="os_name"></p>
-                <p id="kernel"></p>
-                <p id="up_time"></p>
-                <p id="cpu_name"></p>
-                <p id="mem_total"></p>
-                <p id="disk_type"></p>
-                <p id="disk_size"></p>
-                <p id="disk_vendor"></p>
-                <p id="has_battery"></p>
+            <div class="infos-result" aria-label="System information values">
+                <p id="os_name" aria-live="polite">Loading...</p>
+                <p id="kernel" aria-live="polite">Loading...</p>
+                <p id="up_time" aria-live="polite">Loading...</p>
+                <p id="cpu_name" aria-live="polite">Loading...</p>
+                <p id="mem_total" aria-live="polite">Loading...</p>
+                <p id="disk_type" aria-live="polite">Loading...</p>
+                <p id="disk_size" aria-live="polite">Loading...</p>
+                <p id="disk_vendor" aria-live="polite">Loading...</p>
+                <p id="has_battery" aria-live="polite">Loading...</p>
             </div>
-        </div>
+        </main>
     </div>
 </body>
 

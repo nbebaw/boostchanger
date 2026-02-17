@@ -5,60 +5,101 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boost Changer - CPU Settings</title>
     <link rel="stylesheet" href="CSS/style.css">
 </head>
 
 <body id="cpu_settings">
     <div class="container">
-        <div class="nav">
-            <span class="nav-label">CPU Settings for <span><b id="amdOrIntel"></b></span></span>
-            <span class="nav-cpu-mhz">CPU load:&nbsp;<span id="cpu_MHz"></span></span>
-        </div>
-        <div class="sidebar">
-            <img class="logo" src="icon/boostChanger.png" alt="">
-            <ul class="slider-ul">
-                <li><a href="index.html"><img class="icons" src="icon/tachometer.png"></a></li>
-                <li class="active"><a href="#"><img class="icons" src="icon/zahnrad.png"></a></li>
+        <nav class="nav" role="navigation">
+            <span class="nav-label">
+                CPU Settings for <strong id="amdOrIntel">Loading...</strong>
+            </span>
+            <span class="nav-cpu-mhz" aria-live="polite">
+                CPU load:&nbsp;<span id="cpu_MHz">Loading...</span>
+            </span>
+        </nav>
+        
+        <aside class="sidebar" role="complementary">
+            <img class="logo" src="icon/boostChanger.png" alt="Boost Changer Logo">
+            <ul class="slider-ul" role="menu">
+                <li role="menuitem">
+                    <a href="index.html" aria-label="Dashboard">
+                        <img class="icons" src="icon/tachometer.png" alt="Dashboard icon">
+                    </a>
+                </li>
+                <li class="active" role="menuitem">
+                    <a href="#" aria-label="CPU Settings" aria-current="page">
+                        <img class="icons" src="icon/zahnrad.png" alt="Settings icon">
+                    </a>
+                </li>
             </ul>
-            <div>
-                <button class="btn" id="close">Close</button>
-            </div>
-
-        </div>
-        <div class="main-CPU">
-            <div class="turbo-container">
-                <span class="turbo-label">Turbo boost</span>
+            <button class="btn" id="close" aria-label="Close application">Close</button>
+        </aside>
+        
+        <main class="main-CPU" role="main">
+            <section class="turbo-container" aria-labelledby="turbo-label">
+                <span class="turbo-label" id="turbo-label">Turbo Boost</span>
                 <div class="onoffswitch" id="toggle_change">
-                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="turbo_toggle">
+                    <input 
+                        type="checkbox" 
+                        name="onoffswitch" 
+                        class="onoffswitch-checkbox" 
+                        id="turbo_toggle"
+                        aria-label="Toggle Turbo Boost"
+                    >
                     <label class="onoffswitch-label" for="turbo_toggle">
                         <span class="onoffswitch-inner"></span>
                         <span class="onoffswitch-switch"></span>
                     </label>
                 </div>
-            </div>
-            <div class="cpu-perf-container" id="cpu-perf-container">
-                <div class="en-label"><span>Energy Performance:</span><span class="label en-label-badge"
-                        id="bdg"></span></div>
-                <div class="perf">
-                    <button class="btn-perf" type="button" id="btn-save">
+            </section>
+            
+            <section class="cpu-perf-container" id="cpu-perf-container" aria-labelledby="perf-label">
+                <div class="en-label">
+                    <span id="perf-label">Energy Performance:</span>
+                    <span class="en-label-badge" id="bdg" aria-live="polite">Loading...</span>
+                </div>
+                <div class="perf" role="group" aria-label="Performance mode selection">
+                    <button 
+                        class="btn-perf" 
+                        type="button" 
+                        id="btn-save"
+                        aria-label="Set Power Save mode"
+                    >
                         <img class="icons-perf" src="icon/green-energy.png" alt="">
                         <span>Power Save</span>
                     </button>
-                    <button class="btn-perf" type="button" id="btn-balance">
+                    <button 
+                        class="btn-perf" 
+                        type="button" 
+                        id="btn-balance"
+                        aria-label="Set Balance mode"
+                    >
                         <img class="icons-perf" src="icon/recycle.png" alt="">
                         <span>Balance</span>
                     </button>
-                    <button class="btn-perf" type="button" id="btn-perf">
+                    <button 
+                        class="btn-perf" 
+                        type="button" 
+                        id="btn-perf"
+                        aria-label="Set Performance mode"
+                    >
                         <img class="icons-perf" src="icon/lighting.png" alt="">
                         <span>Performance</span>
                     </button>
-                    <button class="btn-perf" type="button" id="btn-ultra">
+                    <button 
+                        class="btn-perf" 
+                        type="button" 
+                        id="btn-ultra"
+                        aria-label="Set Ultra mode"
+                    >
                         <img class="icons-perf" src="icon/energy.png" alt="">
                         <span>Ultra</span>
                     </button>
                 </div>
-            </div>
-        </div>
+            </section>
+        </main>
     </div>
 </body>
 

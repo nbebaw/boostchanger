@@ -124,3 +124,6 @@ dist/boostchanger-*.zip
 package.json.bck
 test.txt
 screenshot
+AGENTS.md
+RELEASE_NOTES_SHORT.md
+RELEASE_NOTES.md

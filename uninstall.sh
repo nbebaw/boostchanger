@@ -1,7 +1,5 @@
 #!/bin/bash
 
-pkgver=5.0.3
-
 if [[ -f /usr/bin/boostchanger ]]
 then
     rm /usr/bin/boostchanger

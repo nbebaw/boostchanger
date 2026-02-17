@@ -1,46 +1,102 @@
+const { SYSTEM_PATHS, CPU_VENDORS, UI_CONFIG } = require("./constants");
+
 class cpuSettings {
   constructor() {
-    this.sys_info = require("systeminformation")
-    this.boostchanger = require("./lib/boostchanger").lib
-    this.intelOrAMDText = document.getElementById("amdOrIntel")
-    this.intelOrAMD()
-    this.getCpuSpeed()
+    this.sys_info = require("systeminformation");
+    this.boostchanger = require("./lib/boostchanger").lib;
+    this.intelOrAMDText = document.getElementById("amdOrIntel");
+    this.updateIntervalId = null;
+    
+    this.initialize();
   }
+
   /**
-   * This function is to indicate if the user has intel or AMD Processor.
+   * Initialize CPU settings
    */
-  intelOrAMD() {
-    this.boostchanger.os_func("cat /proc/cpuinfo | grep -m1 'vendor_id' | awk '{ print $3 }'", (vendor) => {
-      // show notification after command is executed
-      var vendor_name = vendor.trim();
-      if (vendor_name == "GenuineIntel") {
-        this.boostchanger.turboBoost_Intel("/sys/devices/system/cpu/intel_pstate/no_turbo");
-        this.boostchanger.perf_settings_intel("/sys/devices/system/cpu/intel_pstate/max_perf_pct");
-        this.intelOrAMDText.innerHTML = "Intel";
-      } else {
-        this.boostchanger.turboBoost_AMD("/sys/devices/system/cpu/cpufreq/boost");
-        this.boostchanger.perf_settings_AMD("/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor", "/sys/devices/system/cpu/cpu*/cpufreq/scaling_governor");
-        this.intelOrAMDText.innerHTML = "AMD";
+  initialize() {
+    this.detectCPUVendor();
+    this.startCPUSpeedMonitoring();
+  }
+
+  /**
+   * Detect CPU vendor and setup appropriate controls
+   */
+  detectCPUVendor() {
+    this.boostchanger.os_func(
+      "cat /proc/cpuinfo | grep -m1 'vendor_id' | awk '{ print $3 }'",
+      (vendor) => {
+        const vendorName = vendor.trim();
+        
+        if (vendorName === CPU_VENDORS.INTEL) {
+          this.setupIntelControls();
+          this.intelOrAMDText.innerHTML = "Intel";
+        } else if (vendorName === CPU_VENDORS.AMD) {
+          this.setupAMDControls();
+          this.intelOrAMDText.innerHTML = "AMD";
+        } else {
+          console.error("Unknown CPU vendor:", vendorName);
+        }
       }
-    })
+    );
   }
+
   /**
-   * Get the average CPU Speed and print it to the user
+   * Setup Intel CPU controls
    */
-  getCpuSpeed() {
-    // Get CPU speed for the first time
+  setupIntelControls() {
+    this.boostchanger.turboBoost_Intel(SYSTEM_PATHS.INTEL.TURBO);
+    this.boostchanger.perf_settings_intel(SYSTEM_PATHS.INTEL.PERF);
+  }
+
+  /**
+   * Setup AMD CPU controls
+   */
+  setupAMDControls() {
+    this.boostchanger.turboBoost_AMD(SYSTEM_PATHS.AMD.TURBO);
+    this.boostchanger.perf_settings_AMD(
+      SYSTEM_PATHS.AMD.PERF_SINGLE,
+      SYSTEM_PATHS.AMD.PERF_ALL
+    );
+  }
+
+  /**
+   * Update CPU speed display
+   */
+  updateCPUSpeed() {
     this.sys_info.cpuCurrentSpeed().then((cpu_speed) => {
-      var cpu_speedInMHz = cpu_speed.avg * 1000;
-      document.getElementById("cpu_MHz").innerHTML = cpu_speedInMHz + " MHz";
+      const cpuSpeedInMHz = (cpu_speed.avg * 1000).toFixed(0);
+      const cpuMHzElement = document.getElementById("cpu_MHz");
+      
+      if (cpuMHzElement) {
+        cpuMHzElement.innerHTML = cpuSpeedInMHz + " MHz";
+      }
+    }).catch(error => {
+      console.error("Error fetching CPU speed:", error);
     });
-    // CPU speed with interval
-    setInterval(() => {
-      this.sys_info.cpuCurrentSpeed().then((cpu_speed) => {
-        var cpu_speedInMHz = cpu_speed.avg * 1000; //cpu_speed.avg = cpu speed in GHz
-        document.getElementById("cpu_MHz").innerHTML = cpu_speedInMHz + " MHz";
-      });
-    }, 1000);
+  }
+
+  /**
+   * Start monitoring CPU speed with interval
+   */
+  startCPUSpeedMonitoring() {
+    // Get initial CPU speed
+    this.updateCPUSpeed();
+    
+    // Update CPU speed periodically
+    this.updateIntervalId = setInterval(() => {
+      this.updateCPUSpeed();
+    }, UI_CONFIG.CPU_SPEED_UPDATE_INTERVAL);
+  }
+
+  /**
+   * Stop CPU speed monitoring
+   */
+  stopCPUSpeedMonitoring() {
+    if (this.updateIntervalId) {
+      clearInterval(this.updateIntervalId);
+      this.updateIntervalId = null;
+    }
   }
 }
 
-module.exports = { cpuSettings }
+module.exports = { cpuSettings };

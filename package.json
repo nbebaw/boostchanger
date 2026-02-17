@@ -1,6 +1,6 @@
 {
   "name": "boostchanger",
-  "version": "5.0.4",
+  "version": "5.1.0",
   "description": "With this app you can control CPU turbo boost and the settings of the cpu speed in order to consuming less battery voltage.",
   "main": "src/main.js",
   "scripts": {
