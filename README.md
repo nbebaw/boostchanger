@@ -72,13 +72,13 @@ A system authentication dialog will appear when you change settings. The app its
 
 ```bash
 # Download the latest release
-wget https://github.com/nbebaw/boostchanger/releases/latest/download/boostchanger-5.1.0.AppImage
+wget https://github.com/nbebaw/boostchanger/releases/latest/download/boostchanger-5.1.1.AppImage
 
 # Make it executable
-chmod +x boostchanger-5.1.0.AppImage
+chmod +x boostchanger-5.1.1.AppImage
 
 # Run the application
-./boostchanger-5.1.0.AppImage
+./boostchanger-5.1.1.AppImage
 ```
 
 ### Distribution-Specific Packages
@@ -162,7 +162,7 @@ The SUID sandbox helper binary was found, but is not configured correctly...
 **Solution**: Run with `--no-sandbox` flag or see [Issue #1](https://github.com/nbebaw/boostchanger/issues/1) for permanent fix.
 
 ```bash
-./boostchanger-5.1.0.AppImage --no-sandbox
+./boostchanger-5.1.1.AppImage --no-sandbox
 ```
 
 #### App Shows "VM Detected" Error

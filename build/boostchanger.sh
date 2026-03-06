@@ -1,4 +1,4 @@
 #!/bin/bash
 
-pkgver=5.1.0
+pkgver=5.1.1
 /opt/boostchanger-$pkgver/boostchanger
