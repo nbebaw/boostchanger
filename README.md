@@ -23,7 +23,9 @@ Boost Changer is a lightweight Electron-based desktop application that provides 
 - **Turbo Boost Control**: Toggle CPU turbo boost on/off instantly
 - **Energy Performance Modes**: Choose between Power Save, Balance, Performance, and Ultra modes
 - **System Dashboard**: View detailed system information (OS, CPU, memory, disk, battery)
-- **Real-time Monitoring**: Live CPU frequency monitoring
+- **Real-time Monitoring**: Live CPU frequency and temperature monitoring
+- **Tray Quick-Actions**: Control turbo boost and performance mode directly from the system tray
+- **Dark Mode**: Toggle between light and dark themes, persisted across sessions
 - **Intel & AMD Support**: Works with both Intel P-State and AMD CPUFreq drivers
 - **Lightweight**: Minimal resource footprint with modern UI
 - **Auto-Updates**: Built-in update mechanism for non-Arch Linux distributions
@@ -72,13 +74,13 @@ A system authentication dialog will appear when you change settings. The app its
 
 ```bash
 # Download the latest release
-wget https://github.com/nbebaw/boostchanger/releases/latest/download/boostchanger-5.1.1.AppImage
+wget https://github.com/nbebaw/boostchanger/releases/latest/download/boostchanger-5.2.0.AppImage
 
 # Make it executable
-chmod +x boostchanger-5.1.1.AppImage
+chmod +x boostchanger-5.2.0.AppImage
 
 # Run the application
-./boostchanger-5.1.1.AppImage
+./boostchanger-5.2.0.AppImage
 ```
 
 ### Distribution-Specific Packages
@@ -141,7 +143,7 @@ boostchanger/
 
 ### Technology Stack
 
-- **Electron**: v40.4.1
+- **Electron**: v40.8.0
 - **Node.js**: CommonJS modules
 - **UI**: Vanilla JavaScript, CSS Grid/Flexbox
 - **System Info**: systeminformation package
@@ -162,7 +164,7 @@ The SUID sandbox helper binary was found, but is not configured correctly...
 **Solution**: Run with `--no-sandbox` flag or see [Issue #1](https://github.com/nbebaw/boostchanger/issues/1) for permanent fix.
 
 ```bash
-./boostchanger-5.1.1.AppImage --no-sandbox
+./boostchanger-5.2.0.AppImage --no-sandbox
 ```
 
 #### App Shows "VM Detected" Error

@@ -35,12 +35,18 @@ const PERFORMANCE_MODES = {
 
 const UI_CONFIG = {
   CPU_SPEED_UPDATE_INTERVAL: 2000, // milliseconds
-  UPDATER_DELAY: 3000 // milliseconds
+  UPDATER_DELAY: 3000, // milliseconds
+  TRAY_ACTION_DELAY: 500 // ms to wait after page load before sending tray IPC actions
+};
+
+const SETTINGS_KEYS = {
+  DARK_MODE: 'darkMode'
 };
 
 module.exports = {
   SYSTEM_PATHS,
   CPU_VENDORS,
   PERFORMANCE_MODES,
-  UI_CONFIG
+  UI_CONFIG,
+  SETTINGS_KEYS
 };

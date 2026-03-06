@@ -1,3 +1,49 @@
+/* CSS custom properties — light theme (default) */
+:root {
+    --bg: #f3f5f9;
+    --nav-bg: #ffffff;
+    --nav-border: #e0e4e8;
+    --nav-text: #717171;
+    --sidebar-bg: #485167;
+    --sidebar-hover: #6fbe75;
+    --main-text: #717171;
+    --card-bg: #ffffff;
+    --card-border: #dcdcdc;
+    --card-shadow: rgba(0, 0, 0, 0.1);
+    --badge-bg: #2196F3;
+    --btn-perf-text: #666666;
+    --btn-perf-hover-bg: #f6f6f6;
+    --scrollbar-track: #f1f1f1;
+    --scrollbar-thumb: #888;
+    --scrollbar-thumb-hover: #555;
+    --theme-btn-bg: transparent;
+    --theme-btn-border: #c0c4cc;
+    --theme-btn-text: #717171;
+}
+
+/* Dark theme overrides */
+[data-theme="dark"] {
+    --bg: #1e2130;
+    --nav-bg: #262b3d;
+    --nav-border: #3a3f54;
+    --nav-text: #b0b8cc;
+    --sidebar-bg: #1a1e2e;
+    --sidebar-hover: #6fbe75;
+    --main-text: #b0b8cc;
+    --card-bg: #262b3d;
+    --card-border: #3a3f54;
+    --card-shadow: rgba(0, 0, 0, 0.3);
+    --badge-bg: #1976D2;
+    --btn-perf-text: #9aa3b8;
+    --btn-perf-hover-bg: #2e3348;
+    --scrollbar-track: #262b3d;
+    --scrollbar-thumb: #4a5068;
+    --scrollbar-thumb-hover: #6a7390;
+    --theme-btn-bg: transparent;
+    --theme-btn-border: #4a5068;
+    --theme-btn-text: #b0b8cc;
+}
+
 * {
     box-sizing: border-box;
     text-decoration: none;
@@ -8,7 +54,7 @@
 
 body {
     overflow: hidden;
-    background: #f3f5f9;
+    background: var(--bg);
     user-select: none;
 }
 
@@ -25,10 +71,10 @@ body {
 
 .nav {
     grid-area: nav;
-    background: #fff;
-    color: #717171;
-    border-bottom: 1px solid #e0e4e8;
-    border-top: 1px solid #e0e4e8;
+    background: var(--nav-bg);
+    color: var(--nav-text);
+    border-bottom: 1px solid var(--nav-border);
+    border-top: 1px solid var(--nav-border);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -49,7 +95,7 @@ body {
     display: flex;
     flex-direction: column;
     grid-area: sidebar;
-    background: #485167;
+    background: var(--sidebar-bg);
     width: 120px;
     padding: 20px 0;
 }
@@ -82,11 +128,11 @@ body {
 }
 
 .sidebar ul li:hover {
-    background: #6fbe75;
+    background: var(--sidebar-hover);
 }
 
 li.active {
-    background-color: #6fbe75;
+    background-color: var(--sidebar-hover);
 }
 
 .icons {
@@ -125,7 +171,7 @@ li.active {
     display: grid;
     grid-template-columns: auto 1fr;
     gap: 40px;
-    color: #717171;
+    color: var(--main-text);
     padding: 30px;
     overflow-y: auto;
 }
@@ -152,7 +198,7 @@ li.active {
     display: flex;
     flex-direction: column;
     gap: 30px;
-    color: #717171;
+    color: var(--main-text);
     padding: 30px;
     overflow-y: auto;
 }
@@ -163,9 +209,9 @@ li.active {
     align-items: center;
     gap: 50px;
     padding: 20px;
-    background: #fff;
+    background: var(--card-bg);
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px var(--card-shadow);
 }
 
 .turbo-label {
@@ -272,7 +318,7 @@ li.active {
 }
 
 .en-label-badge {
-    background-color: #2196F3;
+    background-color: var(--badge-bg);
     color: white;
     padding: 4px 12px;
     border-radius: 6px;
@@ -291,25 +337,25 @@ li.active {
     align-items: center;
     justify-content: center;
     gap: 12px;
-    background-color: #ffffff;
+    background-color: var(--card-bg);
     border-radius: 6px;
-    border: 2px solid #dcdcdc;
+    border: 2px solid var(--card-border);
     cursor: pointer;
-    color: #666666;
+    color: var(--btn-perf-text);
     font-size: 14px;
     font-weight: bold;
     padding: 20px 15px;
     text-decoration: none;
-    text-shadow: 0px 1px 0px #ffffff;
+    text-shadow: none;
     transition: all 0.2s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px var(--card-shadow);
 }
 
 .btn-perf:hover {
-    background-color: #f6f6f6;
+    background-color: var(--btn-perf-hover-bg);
     border-color: #6fbe75;
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 8px var(--card-shadow);
 }
 
 .btn-perf:active {
@@ -369,16 +415,50 @@ li.active {
 
 .main-dashboard::-webkit-scrollbar-track,
 .main-CPU::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: var(--scrollbar-track);
 }
 
 .main-dashboard::-webkit-scrollbar-thumb,
 .main-CPU::-webkit-scrollbar-thumb {
-    background: #888;
+    background: var(--scrollbar-thumb);
     border-radius: 4px;
 }
 
 .main-dashboard::-webkit-scrollbar-thumb:hover,
 .main-CPU::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    background: var(--scrollbar-thumb-hover);
+}
+
+/* Nav right group (CPU speed + temp + theme toggle) */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.nav-cpu-temp {
+    font-size: 0.95rem;
+}
+
+/* Dark mode toggle button */
+.theme-toggle-btn {
+    background: var(--theme-btn-bg);
+    border: 1px solid var(--theme-btn-border);
+    color: var(--theme-btn-text);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease;
+    line-height: 1.4;
+}
+
+.theme-toggle-btn:hover {
+    border-color: #6fbe75;
+    background: rgba(111, 190, 117, 0.1);
+}
+
+.theme-toggle-btn:focus {
+    outline: 2px solid #6fbe75;
+    outline-offset: 2px;
 }

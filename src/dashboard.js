@@ -1,5 +1,7 @@
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
+const { UI_CONFIG } = require("./constants");
+
 class dashboard {
   constructor() {
     this.elements = {
@@ -7,6 +9,7 @@ class dashboard {
       kernel: document.getElementById("kernel"),
       up_time: document.getElementById("up_time"),
       cpu_name: document.getElementById("cpu_name"),
+      cpu_temp: document.getElementById("cpu_temp"),
       mem_total: document.getElementById("mem_total"),
       disk_type: document.getElementById("disk_type"),
       disk_size: document.getElementById("disk_size"),
@@ -16,10 +19,11 @@ class dashboard {
     
     this.sys_info = require("systeminformation");
     this.getAllValues();
+    this.startTempMonitoring();
   }
 
   /**
-   * Set element content with localStorage caching
+   * Set element text content using localStorage caching
    * @param {HTMLElement} element HTML element to update
    * @param {String} key localStorage key
    * @param {String} value Value to store and display
@@ -27,7 +31,6 @@ class dashboard {
   setElementWithCache(element, key, value) {
     if (!element) return;
     
-    // Use cached value if available, otherwise set new value
     const cachedValue = localStorage.getItem(key);
     if (cachedValue) {
       element.innerHTML = cachedValue;
@@ -56,7 +59,41 @@ class dashboard {
   }
 
   /**
-   * Fetch and display all system information
+   * Fetch and display CPU temperature, updating the #cpu_temp element
+   */
+  updateCPUTemp() {
+    this.sys_info.cpuTemperature().then((temp) => {
+      if (!this.elements.cpu_temp) return;
+      if (temp.main && temp.main > 0) {
+        this.elements.cpu_temp.innerHTML = `${temp.main.toFixed(1)} °C`;
+      } else {
+        this.elements.cpu_temp.innerHTML = "N/A";
+      }
+    }).catch(() => {
+      if (this.elements.cpu_temp) this.elements.cpu_temp.innerHTML = "N/A";
+    });
+  }
+
+  /**
+   * Start live CPU temperature polling
+   */
+  startTempMonitoring() {
+    this.updateCPUTemp();
+    this.tempInterval = setInterval(() => this.updateCPUTemp(), UI_CONFIG.CPU_SPEED_UPDATE_INTERVAL);
+  }
+
+  /**
+   * Stop CPU temperature polling
+   */
+  stopTempMonitoring() {
+    if (this.tempInterval) {
+      clearInterval(this.tempInterval);
+      this.tempInterval = null;
+    }
+  }
+
+  /**
+   * Fetch and display all static system information
    */
   getAllValues() {
     const valueObject = {

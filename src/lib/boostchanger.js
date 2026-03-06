@@ -9,6 +9,49 @@ class boostchanger {
         this.dialog = require("electron").dialog;
         this.turboToggleAttached = false;
         this.perfButtonsAttached = false;
+
+        // Current state for tray sync
+        this._turboOn = null;
+        this._perfMode = null;
+
+        // IPC listeners are only valid in the renderer process
+        if (ipcRenderer) {
+            // Listen for tray-initiated turbo toggle
+            ipcRenderer.on('tray-toggle-turbo', () => {
+                const turboToggle = document.getElementById("turbo_toggle");
+                if (turboToggle) {
+                    turboToggle.checked = !turboToggle.checked;
+                    turboToggle.dispatchEvent(new Event('change', { bubbles: true }));
+                }
+            });
+
+            // Listen for tray-initiated performance mode change
+            ipcRenderer.on('tray-set-perf', (e, modeName) => {
+                const labelMap = {
+                    'Power Save': 'btn-save',
+                    'Balance': 'btn-balance',
+                    'Performance': 'btn-perf',
+                    'Ultra': 'btn-ultra'
+                };
+                const btnId = labelMap[modeName];
+                if (btnId) {
+                    const btn = document.getElementById(btnId);
+                    if (btn) btn.click();
+                }
+            });
+        }
+    }
+
+    /**
+     * Push current turbo + perf state to main process for tray sync
+     */
+    pushTrayState() {
+        if (ipcRenderer) {
+            ipcRenderer.send("updateTrayState", {
+                turboOn: this._turboOn,
+                perfMode: this._perfMode
+            });
+        }
     }
 
     /**
@@ -82,6 +125,8 @@ class boostchanger {
             
             // Intel: 0=ON, 1=OFF | AMD: 1=ON, 0=OFF
             turboToggle.checked = isIntel ? (line === "0") : (line === "1");
+            this._turboOn = turboToggle.checked;
+            this.pushTrayState();
 
             // Attach event listener only once
             document.getElementById("toggle_change").addEventListener("change", () => {
@@ -92,6 +137,8 @@ class boostchanger {
                 const message = isChecked ? "Turbo Boost is now ON" : "Turbo Boost is now OFF";
 
                 this.writeSystemFile(valueToWrite, file, () => {
+                    this._turboOn = isChecked;
+                    this.pushTrayState();
                     this.showNotification(message);
                 });
             });
@@ -121,6 +168,8 @@ class boostchanger {
             for (const [key, config] of Object.entries(modes)) {
                 if (String(config.value) === String(currentValue)) {
                     badgeTag.innerHTML = ` ${config.label}`;
+                    this._perfMode = config.label;
+                    this.pushTrayState();
                     break;
                 }
             }
@@ -143,6 +192,8 @@ class boostchanger {
                     this.showAlreadyActiveDialog(currentMode);
                 } else {
                     this.writeSystemFile(targetMode.value, targetPath, () => {
+                        this._perfMode = targetMode.label;
+                        this.pushTrayState();
                         this.showNotification(`Mode: ${targetMode.label}`);
                         badgeTag.innerHTML = ` ${targetMode.label}`;
                     });

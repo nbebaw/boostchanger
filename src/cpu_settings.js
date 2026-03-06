@@ -6,6 +6,7 @@ class cpuSettings {
     this.boostchanger = require("./lib/boostchanger").lib;
     this.intelOrAMDText = document.getElementById("amdOrIntel");
     this.updateIntervalId = null;
+    this.tempIntervalId = null;
     
     this.initialize();
   }
@@ -16,6 +17,7 @@ class cpuSettings {
   initialize() {
     this.detectCPUVendor();
     this.startCPUSpeedMonitoring();
+    this.startCPUTempMonitoring();
   }
 
   /**
@@ -76,15 +78,40 @@ class cpuSettings {
   }
 
   /**
+   * Update CPU temperature display in the nav bar
+   */
+  updateCPUTemp() {
+    this.sys_info.cpuTemperature().then((temp) => {
+      const tempElement = document.getElementById("cpu_temp_nav");
+      if (!tempElement) return;
+      if (temp.main && temp.main > 0) {
+        tempElement.innerHTML = `${temp.main.toFixed(1)} °C`;
+      } else {
+        tempElement.innerHTML = "N/A";
+      }
+    }).catch(() => {
+      const tempElement = document.getElementById("cpu_temp_nav");
+      if (tempElement) tempElement.innerHTML = "N/A";
+    });
+  }
+
+  /**
    * Start monitoring CPU speed with interval
    */
   startCPUSpeedMonitoring() {
-    // Get initial CPU speed
     this.updateCPUSpeed();
-    
-    // Update CPU speed periodically
     this.updateIntervalId = setInterval(() => {
       this.updateCPUSpeed();
+    }, UI_CONFIG.CPU_SPEED_UPDATE_INTERVAL);
+  }
+
+  /**
+   * Start monitoring CPU temperature with interval
+   */
+  startCPUTempMonitoring() {
+    this.updateCPUTemp();
+    this.tempIntervalId = setInterval(() => {
+      this.updateCPUTemp();
     }, UI_CONFIG.CPU_SPEED_UPDATE_INTERVAL);
   }
 
@@ -95,6 +122,16 @@ class cpuSettings {
     if (this.updateIntervalId) {
       clearInterval(this.updateIntervalId);
       this.updateIntervalId = null;
+    }
+  }
+
+  /**
+   * Stop CPU temperature monitoring
+   */
+  stopCPUTempMonitoring() {
+    if (this.tempIntervalId) {
+      clearInterval(this.tempIntervalId);
+      this.tempIntervalId = null;
     }
   }
 }
